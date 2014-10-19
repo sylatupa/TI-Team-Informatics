@@ -15,14 +15,12 @@ using System.Windows.Shapes;
 
 namespace Working_Memory_Battery_and_Sensor_Input
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }

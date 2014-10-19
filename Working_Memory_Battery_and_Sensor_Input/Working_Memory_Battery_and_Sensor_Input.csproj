@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Introduction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +64,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Introduction.xaml.cs">
+      <DependentUpon>Introduction.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -92,6 +99,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\main\main.csproj">
+      <Project>{b4e8ef76-28de-4f77-bc45-9ceba3e63e12}</Project>
+      <Name>main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WMB_Class_Library\WMB_Class_Library.csproj">
+      <Project>{3ea70d40-8dea-4fcf-ab58-a9cd1fec9ebe}</Project>
+      <Name>WMB_Class_Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="Human_Affect_Class_Library\Human_Affect_Class_Library.csproj">
+      <Project>{5177ac43-cb8e-48d5-97cf-7afd23069f66}</Project>
+      <Name>Human_Affect_Class_Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

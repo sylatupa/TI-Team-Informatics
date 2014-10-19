@@ -1,8 +1,23 @@
 ﻿<Window x:Class="Working_Memory_Battery_and_Sensor_Input.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenHeightKey}}" Height="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}">
+    <StackPanel HorizontalAlignment="Left" Height="1252" VerticalAlignment="Top" Width="692">
+        <TextBlock>
+            
+        <Hyperlink NavigateUri="Introduction.xaml">Introduction
+        </Hyperlink>
+        </TextBlock>
+        <TextBlock>
+        <Hyperlink NavigateUri="Game.xaml">Start Game
+        </Hyperlink>
+        </TextBlock>
+        <Hyperlink NavigateUri="Survey.xaml">Survey
+        </Hyperlink>
+        </TextBlock>
+        </TextBlock>
+        <Hyperlink NavigateUri="Survey.xaml">Survey
+        </Hyperlink>
+        </TextBlock>
+    </StackPanel>
 </Window>

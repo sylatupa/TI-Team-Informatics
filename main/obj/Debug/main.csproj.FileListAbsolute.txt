@@ -1,0 +1,7 @@
+C:\Dropbox\CLASS\TI-Team-Informatics\main\bin\Debug\main.dll
+C:\Dropbox\CLASS\TI-Team-Informatics\main\bin\Debug\main.pdb
+C:\Dropbox\CLASS\TI-Team-Informatics\main\obj\Debug\main.csprojResolveAssemblyReference.cache
+C:\Dropbox\CLASS\TI-Team-Informatics\main\obj\Debug\main.dll
+C:\Dropbox\CLASS\TI-Team-Informatics\main\obj\Debug\main.pdb
+C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\bin\Debug\main.dll
+C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\bin\Debug\main.pdb
