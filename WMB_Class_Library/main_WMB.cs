@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Human_Affect_Class_Library
+namespace WMB_Class_Library
 {
-    public class Class1
+    public class main_WMB
     {
     }
 }
