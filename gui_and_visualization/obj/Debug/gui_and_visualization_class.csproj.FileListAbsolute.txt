@@ -1,0 +1,5 @@
+C:\Dropbox\CLASS\TI-Team-Informatics\gui_and_visualization\bin\Debug\gui_and_visualization.dll
+C:\Dropbox\CLASS\TI-Team-Informatics\gui_and_visualization\bin\Debug\gui_and_visualization.pdb
+C:\Dropbox\CLASS\TI-Team-Informatics\gui_and_visualization\obj\Debug\gui_and_visualization_class.csprojResolveAssemblyReference.cache
+C:\Dropbox\CLASS\TI-Team-Informatics\gui_and_visualization\obj\Debug\gui_and_visualization.dll
+C:\Dropbox\CLASS\TI-Team-Informatics\gui_and_visualization\obj\Debug\gui_and_visualization.pdb

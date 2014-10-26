@@ -4,9 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WMB_Class_Library
+namespace main_WMB
 {
-    public class main_WMB
+    /// <summary>
+    /// ¯\(o_°)/¯ ¯\(o_°)/¯ ¯\(o_°)/¯ ¯\(o_°)/¯ ¯\(o_°)/¯ ¯\(o_°)/¯ 
+    /// code for the WMB tests
+    /// </summary>
+    public class Main_wmb
     {
+        public void main_wmb()
+        {
+            Console.WriteLine("main_WMB()");
+
+        }
     }
 }

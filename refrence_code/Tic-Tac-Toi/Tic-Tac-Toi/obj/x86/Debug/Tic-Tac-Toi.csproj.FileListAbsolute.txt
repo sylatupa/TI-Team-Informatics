@@ -1,0 +1,9 @@
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\bin\Debug\Tic-Tac-Toi.exe
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\bin\Debug\Tic-Tac-Toi.pdb
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\Tic_Tac_Toi.Form1.resources
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\Tic_Tac_Toi.Properties.Resources.resources
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\Tic-Tac-Toi.exe
+E:\Code_Files\Tic-Tac-Toi\Tic-Tac-Toi\obj\x86\Debug\Tic-Tac-Toi.pdb
