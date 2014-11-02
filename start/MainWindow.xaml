@@ -21,9 +21,21 @@
     </Window.Resources>
 -->
         <Grid ShowGridLines="True">
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            
+        </Grid.ColumnDefinitions>
+
         <!--<ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}"/>-->
-        <StackPanel   Grid.Column="1" Grid.Row="1"  Name="stackpanel">
+        <StackPanel   Grid.Column="0" Grid.Row="0"  Name="stackpanel">
             <TextBlock>
             Introduction Sentence
             </TextBlock>
@@ -49,8 +61,8 @@
             <Rectangle  
                        ToolTip="Dominance" Fill="#FF410BF4" />
         </StackPanel>
-
-        <Grid Height="444" Background="red" Width="444" ShowGridLines="True" Name="grid_button" Grid.Column="2" Grid.Row="1">
+        
+            <Grid ShowGridLines="True" Name="grid_button" Grid.Column="1" Grid.Row="0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -79,9 +91,9 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-
-        </Grid>
-        
+            
+            </Grid>
+        <Label Name="score1" Grid.Column="3" Grid.Row="0">test</Label>
         
     </Grid>
 </Window>

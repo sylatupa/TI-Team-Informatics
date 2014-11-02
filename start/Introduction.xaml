@@ -10,6 +10,7 @@
     
     <StackPanel HorizontalAlignment="Left" Height="1252" VerticalAlignment="Top" Width="692">
         <TextBlock>
+            here
         </TextBlock>
         <ListBox 
             ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
