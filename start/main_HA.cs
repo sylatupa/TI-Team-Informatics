@@ -13,9 +13,9 @@ namespace main_HA
     /// </summary>
     public class main_HA
     {
-    public void main_HA() {
-            Console.WriteLine("main_HA is here");
-        }
+   // public void main_HA() {
+     //       Console.WriteLine("main_HA is here");
+       // }
         public void write_black_box_socket(string socketString)
         {
             //take black box data and write to log

@@ -1,5 +1,0 @@
-C:\Dropbox\CLASS\TI-Team-Informatics\WMB_Class_Library\bin\Debug\WMB_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\WMB_Class_Library\bin\Debug\WMB_Class_Library.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\WMB_Class_Library\obj\Debug\WMB_Class_Library.csprojResolveAssemblyReference.cache
-C:\Dropbox\CLASS\TI-Team-Informatics\WMB_Class_Library\obj\Debug\WMB_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\WMB_Class_Library\obj\Debug\WMB_Class_Library.pdb

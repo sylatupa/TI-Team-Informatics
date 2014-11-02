@@ -13,10 +13,3 @@ C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\Working_Memory_Battery_and_
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.exe.config
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.exe
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\gui_and_visualization.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\main.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\WMB_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\gui_and_visualization.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\main.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\WMB_Class_Library.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Human_Affect_Class_Library.pdb
