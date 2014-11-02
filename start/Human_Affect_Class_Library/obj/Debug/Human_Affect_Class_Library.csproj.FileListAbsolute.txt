@@ -1,7 +1,0 @@
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\Human_Affect_Class_Library\bin\Debug\Human_Affect_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\Human_Affect_Class_Library\bin\Debug\Human_Affect_Class_Library.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\Human_Affect_Class_Library\obj\Debug\Human_Affect_Class_Library.csprojResolveAssemblyReference.cache
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\Human_Affect_Class_Library\obj\Debug\Human_Affect_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\Human_Affect_Class_Library\obj\Debug\Human_Affect_Class_Library.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\bin\Debug\Human_Affect_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\Working_Memory_Battery_and_Sensor_Input\bin\Debug\Human_Affect_Class_Library.pdb

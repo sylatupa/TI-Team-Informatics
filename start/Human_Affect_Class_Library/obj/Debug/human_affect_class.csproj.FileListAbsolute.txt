@@ -1,5 +1,0 @@
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Human_Affect_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Human_Affect_Class_Library.pdb
-C:\Dropbox\CLASS\TI-Team-Informatics\start\Human_Affect_Class_Library\obj\Debug\human_affect_class.csprojResolveAssemblyReference.cache
-C:\Dropbox\CLASS\TI-Team-Informatics\start\Human_Affect_Class_Library\obj\Debug\Human_Affect_Class_Library.dll
-C:\Dropbox\CLASS\TI-Team-Informatics\start\Human_Affect_Class_Library\obj\Debug\Human_Affect_Class_Library.pdb
