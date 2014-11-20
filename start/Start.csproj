@@ -67,7 +67,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Introduction.xaml">
+    <Compile Include="survey.xaml.cs">
+      <DependentUpon>survey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="introduction.xaml.cs">
+      <DependentUpon>introduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Score.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="visualization.xaml.cs">
+      <DependentUpon>visualization.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="survey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="introduction.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,14 +102,18 @@
     </Compile>
     <Compile Include="custom_button_class.cs" />
     <Compile Include="grid_class.cs" />
-    <Compile Include="Introduction.xaml.cs">
-      <DependentUpon>Introduction.xaml</DependentUpon>
+    <Compile Include="game.xaml.cs">
+      <DependentUpon>game.xaml</DependentUpon>
     </Compile>
     <Compile Include="main.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="visualization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="main_HA.cs" />

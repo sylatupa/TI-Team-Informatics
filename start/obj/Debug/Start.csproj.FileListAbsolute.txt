@@ -13,3 +13,9 @@ C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\Working_Memory_Battery_and_
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.exe.config
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.exe
 C:\Dropbox\CLASS\TI-Team-Informatics\start\bin\Debug\Working_Memory_Battery_and_Sensor_Input.pdb
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\game.baml
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\game.g.cs
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\survey.baml
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\survey.g.cs
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\visualization.baml
+C:\Dropbox\CLASS\TI-Team-Informatics\start\obj\Debug\visualization.g.cs

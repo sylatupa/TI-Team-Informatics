@@ -26,9 +26,9 @@ public class Main
     int port = 0;
     public void main()
     {
-        main_wmb.main_wmb();
-        send_socket_test();
-        
+        //main_wmb.main_wmb();
+        //send_socket_test();
+
     }
     public void send_socket_test()
     {

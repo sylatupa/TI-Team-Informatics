@@ -6,19 +6,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="Introduction">
-   
-    
-    <StackPanel HorizontalAlignment="Left" Height="1252" VerticalAlignment="Top" Width="692">
-        <TextBlock>
-            here
-        </TextBlock>
-        <ListBox 
-            ItemContainerStyle="{DynamicResource ListBoxItemStyle}"
-            ItemsPanel="{DynamicResource ItemsPanelTemplate}"                    
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-            >
-           
-        </ListBox>
-    </StackPanel>
-    
+    <Grid Name="cp_introduction">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_intro_intro">
+            <Label>Hello! Have you Been Introduced to the Spatial Memory Game?</Label>
+            <Button Name="button_no_pregame_no" Click="button_click_pre_game_no">No</Button>
+            <Button Name="button_yes_pregame_yes" Click="button_click_pre_game_yes">Yes</Button>
+            
+ 
+        </StackPanel>
+        <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_intro" Visibility="Hidden">
+            <Label>Introduction</Label>
+            <Button Name="button_intro_next" Click="button_click_pre_game_next">Next</Button>
+        </StackPanel>
+
+        <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_select_user" Visibility="Hidden">
+            <Label>Select your user Id</Label>
+            <ComboBox Name="ddl"></ComboBox>
+            <Button Name="button_user_next" Click="button_click_user_next">Next</Button>
+            <!--<Button Name="button_user_prev" Click="button_click_user_prev">Prev</Button>-->
+        </StackPanel>
+
+    </Grid>    
 </Page>
