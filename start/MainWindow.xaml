@@ -50,8 +50,10 @@
             <Button Name="button_get_visualization" Click="get_visualization">Chart</Button>
         </StackPanel>
         <Grid Name="cp_mainwindow" Background="White" Margin="10"  Grid.Column="1" Grid.Row="0" ShowGridLines="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+           
         </Grid>
         <StackPanel Margin="10"  Grid.Column="1" Grid.Row="1"  Name="cp_mainwindow_footer">
+            
         </StackPanel>
     </Grid>
 

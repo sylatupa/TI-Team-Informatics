@@ -26,6 +26,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         /// </summary>
         public int has_introduction = 0;
         public bool complete = false;
+        public int num_intro_slides = 1;
         MainWindow thisMainWindow;
         public Introduction()
         {
@@ -44,7 +45,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         private void button_click_pre_game_yes(object sender, RoutedEventArgs e)
         {
             cp_pregame_intro_intro.Visibility = Visibility.Hidden;
-            
+
             XDocument doc = XDocument.Load(@"users.xml");
             var persons = from p in doc.Root.Elements("user").Elements("name") select p.Value;
             this.ddl.ItemsSource = persons;
@@ -58,18 +59,42 @@ namespace Working_Memory_Battery_and_Sensor_Input
         {
             thisMainWindow.cp_mainwindow.Children.Clear();
             thisMainWindow.get_intro_page(null, new RoutedEventArgs());
-
- 
-
         }
         private void button_click_pre_game_next(object sender, RoutedEventArgs e)
         {
-            cp_pregame_intro_intro.Visibility = Visibility.Hidden;
-            cp_pregame_intro.Visibility = Visibility.Visible;
+            num_intro_slides++;
+            if (num_intro_slides == 2)
+            {
+                image_slide1.Visibility = Visibility.Hidden;
+                image_slide2.Visibility = Visibility.Visible;
+                image_slide3.Visibility = Visibility.Hidden;
+                image_slide4.Visibility = Visibility.Hidden;
+                Console.WriteLine(num_intro_slides + "in");
+            }
+            if (num_intro_slides == 3)
+            {
+                image_slide1.Visibility = Visibility.Hidden;
+                image_slide2.Visibility = Visibility.Hidden;
+                image_slide3.Visibility = Visibility.Visible;
+                image_slide4.Visibility = Visibility.Hidden;
+                Console.WriteLine(num_intro_slides + "in");
+            }
+            if (num_intro_slides == 4)
+            {
+                image_slide1.Visibility = Visibility.Hidden;
+                image_slide2.Visibility = Visibility.Hidden;
+                image_slide3.Visibility = Visibility.Hidden;
+                image_slide4.Visibility = Visibility.Visible;
+                Console.WriteLine(num_intro_slides + "in");
+            }
+            if (num_intro_slides > 4)
+            {
+                image_slide4.Visibility = Visibility.Hidden;
+                cp_pregame_intro_intro.Visibility = Visibility.Hidden;
+                cp_pregame_intro.Visibility = Visibility.Visible;
+                thisMainWindow.get_survey_page(null, new RoutedEventArgs());
+            }
 
-            thisMainWindow.get_survey_page(null, new RoutedEventArgs());
         }
-
-
     }
 }

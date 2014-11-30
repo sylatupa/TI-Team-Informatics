@@ -17,6 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_intro_intro">
+
             <Label>Hello! Have you Been Introduced to the Spatial Memory Game?</Label>
             <Button Name="button_no_pregame_no" Click="button_click_pre_game_no">No</Button>
             <Button Name="button_yes_pregame_yes" Click="button_click_pre_game_yes">Yes</Button>
@@ -24,8 +25,11 @@
  
         </StackPanel>
         <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_intro" Visibility="Hidden">
-            <Label>Introduction</Label>
-            <Button Name="button_intro_next" Click="button_click_pre_game_next">Next</Button>
+                        <Button Name="button_intro_next" Click="button_click_pre_game_next">Next</Button>
+            <Image  Name="image_slide1" Source="/images/slide1.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+            <Image  Name="image_slide2" Source="/images/slide2.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+            <Image  Name="image_slide3" Source="/images/slide3.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+            <Image  Name="image_slide4" Source="/images/slide4.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
         </StackPanel>
 
         <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_select_user" Visibility="Hidden">
