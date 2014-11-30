@@ -64,6 +64,49 @@ public class Main
             //send a string through the socket
          */
     }
+
+    /*
+    public void send_socket_test()
+    {
+        
+        byte[] msg = Encoding.UTF8.GetBytes("This is a test");
+        byte[] bytes = new byte[256];
+        //connect to server and get intput/output stream
+            TcpClient client = new TcpClient("localhost", 74740);
+            //TcpClient client = new TcpClient(127.01.01, 74740);
+        
+            TcpClient client = new TcpClient(string ip, int port);
+        NetworkStream stream = client.GetStream();
+        //send a string to the server
+        ASCIIEncoding Enc = new ASCIIEncoding();
+        string s = "message";
+        byte[] buffer = Enc.GetBytes(s);
+        stream.Write(buffer, 0, buffer.Length);
+        stream.Flush();
+            try
+            {
+                // Blocks until send returns. 
+                int byteCount = server.Send(msg, SocketFlags.None);
+                Console.WriteLine("Sent {0} bytes.", byteCount);
+
+                // Get reply from the server.
+                byteCount = server.Receive(bytes, SocketFlags.None);
+                if (byteCount > 0)
+                    Console.WriteLine(Encoding.UTF8.GetString(bytes));
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("{0} Error code: {1}.", e.Message, e.ErrorCode);
+                return (e.ErrorCode);
+            }
+            return 0;
+            //send a string through the socket
+    
+    }
+    */
+    
+    
+    
     public void get_socket_test()
     {
         //get a string through the socket and set the charts

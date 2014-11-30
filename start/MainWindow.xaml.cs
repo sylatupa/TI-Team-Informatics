@@ -11,8 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-
 //using main; //TI main functions
 namespace Working_Memory_Battery_and_Sensor_Input
 {
@@ -33,17 +31,11 @@ namespace Working_Memory_Battery_and_Sensor_Input
             Main main = new Main();
             main.main();
             //Console.WriteLine("Starting Main");
-
-
             set_button_navigation(this, new RoutedEventArgs());
             get_intro_page(this, new RoutedEventArgs());
-
-
-
             // the ask game 
             // else introduction, survey
             // else get survey
-
         }
         public void get_intro_page(object sender, RoutedEventArgs e)
         {

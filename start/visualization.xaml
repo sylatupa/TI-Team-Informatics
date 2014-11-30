@@ -6,28 +6,35 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="visualization">
-    <Grid Name="cp_visualization" Margin="10" ShowGridLines="False"  Grid.Column="1" Grid.Row="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="120" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+    <Grid Name="cp_visualization" Margin="10" ShowGridLines="False" >
+        <Grid Name="grid_table" Margin="10" ShowGridLines="True"  Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="textblock_game_output" Grid.Column="0" Grid.Row="0"></TextBlock>
 
-        <TextBlock Grid.Column="0" Grid.Row="0">Attention</TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="0" >Dominance</TextBlock>
-        <TextBlock Grid.Column="2" Grid.Row="0">Pleasure</TextBlock>
-           
-        <Rectangle Name="bar_Pleasure" Height="100" Width="33"  Grid.Column="0" Grid.Row="1" ToolTip="Pleasure" Fill="#FFF40B0B" VerticalAlignment="Bottom"/>
-        <Rectangle Name="bar_Attention" Height="100" Width="33" Grid.Column="1" Grid.Row="1"
+        </Grid>
+        <Grid Name="grid_graphs" Margin="10" ShowGridLines="False"  Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0">Attention</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" >Dominance</TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="0">Pleasure</TextBlock>
+            <Rectangle Name="bar_Pleasure" Height="100" Width="33"  Grid.Column="0" Grid.Row="1" ToolTip="Pleasure" Fill="#FFF40B0B" VerticalAlignment="Bottom"/>
+            <Rectangle Name="bar_Attention" Height="100" Width="33" Grid.Column="1" Grid.Row="1"
                        ToolTip="Attention" Fill="#FF7EF40B"  VerticalAlignment="Bottom"/>
-        <Rectangle Name="bar_Dominance" Height="100" Width="33"   Grid.Column="2" Grid.Row="1"
+            <Rectangle Name="bar_Dominance" Height="100" Width="33"   Grid.Column="2" Grid.Row="1"
                        ToolTip="Dominance" Fill="#FF410BF4"  VerticalAlignment="Bottom"/>
-
-
+        </Grid>
     </Grid>
-
 </Page>

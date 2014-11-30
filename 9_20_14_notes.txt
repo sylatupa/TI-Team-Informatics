@@ -1,0 +1,41 @@
+engagment
+frustration
+meditation
+instant excitement
+logn term excitement
+
+adas system 2
+emotiv dashboard
+emotiv control panel is used to test the utility
+
+were not using the 5 values, instead were using the PAD
+
+adasPAD.jar recieves and sends
+
+adasTest.jar recieves and sends the 3 vals
+74740
+7474
+
+set up the emotiv so they are no longer black or red
+
+chewing gum, eating, but talking is ok.
+
+emotive control panel measure system status, system up time, wireless signal, wireless, and battery power.
+
+
+sylatupaASU
+sylatupaEmotiv
+
+sylatupaEmotiv
+
+Play the first level a couple of times
+Add the score to the 
+show 
+
+3:30 on Monday
+
+assinging weights to the user PAD and scoring algorithm
+
+if the user is bored and their winning so instead 5 and 3 then 7 and 4
+
+closed loop create real hard level. 
