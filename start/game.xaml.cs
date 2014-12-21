@@ -19,6 +19,7 @@ using System.Xml.Linq;
 
 namespace Working_Memory_Battery_and_Sensor_Input
 {
+    #region data_classes
     public class LevelData
     {
         public int size;
@@ -48,14 +49,15 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public DateTime last_clicked;
         public DateTime current_click;
         public float seconds_since_last_clicked;
-
         public int size;
         public int number_dots;
         public int show_button_duration;
         public List<float> answers_to_selections_distances = new List<float>();
     }
+    #endregion
     public partial class Game : Page
     {
+        #region variables_instance
         public Random num = new Random();
         public Random number = new Random();
         public custom_button[,] button_array;
@@ -70,7 +72,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public LevelData level3;
         public LevelData current_level;
         public List<LevelData> level_data_array;
-
+        public Game_object thisGame;
         Dictionary<string, int[]> dictionary;
         int[] engagement = { 1, 1, 1 };
         int[] boredom = { -1, -1, -1 };
@@ -80,9 +82,11 @@ namespace Working_Memory_Battery_and_Sensor_Input
         int[] concentrating = { 1, -1, 1 };
         int[] disagreement = { -1, 1, 1 };
         int[] interested = { 1, 1, -1 };
-
+        #endregion
+        #region game_main
         public Game()
         {
+
             InitializeComponent();
             dictionary = new Dictionary<string, int[]>();
             //{pleasure, arrousal, dominace};
@@ -106,8 +110,8 @@ namespace Working_Memory_Battery_and_Sensor_Input
             level_data_array.Add(level2);
             level_data_array.Add(level1);
             current_level_number = level_data_array.Count;
+            number_dots_clicked = 0;
         }
-        public Game_object thisGame;
         public void run_game()
         {
             Console.WriteLine("Running Game");
@@ -126,8 +130,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 thisGame.show_button_duration = current_level.show_button_duration;
 
                 set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
-
-                game_started = true;
                 button_array = get_button_array(thisGame.size);
                 set_playing_grid_properties(thisGame.size, button_array);
                 answers = get_random_coordinate_array(thisGame.size, thisGame.number_dots);
@@ -142,113 +144,91 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 run_game();
             }
         }
+        #endregion
+        #region reporting_and_scoring
 
-        public void set_textblock_game_data(int size, int number_dots, float user_game_score_euc, float user_game_score_man, int show_button_duration)
+        public void set_textblock_game_data(int size, int this_number_dots, float user_game_score_euc, float user_game_score_man, int show_button_duration)
         {
+
             textblock_game_data.Text = "";
-            textblock_game_data.Text = "Size: " + size.ToString();
-            textblock_game_data.Text += "   | Dots:  " + number_dots.ToString();
-            textblock_game_data.Text += "   | Euclidean Score:  " + user_game_score_euc.ToString();
-            textblock_game_data.Text += "   | Manhattan Score:  " + user_game_score_man.ToString();
-            textblock_game_data.Text += "   | Buttons Visable for:  " + show_button_duration.ToString();
-        }
-        private void click_game_event(object sender, RoutedEventArgs e)
-        {
-            number_dots_clicked += 1;
-            set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
-            if (number_dots_clicked < thisGame.number_dots)
+            textblock_game_data.Text += "   | Buttons Visable for:  " + (show_button_duration / 1000).ToString() + " seconds";
+            textblock_game_data.Text = "Size: " + size.ToString() +"X"+ size.ToString() + " Grid";
+            textblock_game_data.Text += "   | Dots:  " + this_number_dots.ToString() + "/" + thisGame.number_dots.ToString();
+            if (this_number_dots < thisGame.number_dots)
             {
-                custom_button new_button = sender as custom_button;
-                button_array[new_button.x, new_button.y].Template = Control_Template.Template;
-                cooridinate new_coord = new cooridinate();
-                new_coord.x = new_button.x;
-                new_coord.y = new_button.y;
-                selections.Add(new_coord);
-                Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
-
             }
             else
             {
-                custom_button new_button = sender as custom_button;
-                button_array[new_button.x, new_button.y].Template = Control_Template.Template;
-                cooridinate new_coord = new cooridinate();
-                new_coord.x = new_button.x;
-                new_coord.y = new_button.y;
-                selections.Add(new_coord);
-
-                List<cooridinate> answers2 = answers;
-                List<cooridinate> selections2 = selections;
-                thisGame.user_game_score_euc = rowbasedMinEuclideanDistance(answers, selections);
-                thisGame.user_game_score_man = rowbasedMinManhattanDistance(answers2, selections2);
-
-                thisGame.game_end = DateTime.Now;
-                thisGame.game_play_duration = thisGame.game_start - thisGame.game_end;
-                set_game_data();
-                button_next_game.Visibility = Visibility.Visible;  // games over go to the next game
-                number_dots_clicked = 0;
-            }
-        }
-        private void click_next_game_event(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("Go to the next game");
-            clear_buttons(button_array);
-            run_game();
-        }
-        private void set_playing_grid_properties(int size, custom_button[,] buttonArray)
-        {
-            Console.WriteLine(button_array.ToString() + "Setting buttonArray with size: " + size);
-            // takes size of grid and the button array
-            for (int i = 0; i < size; i++)
-            {
-                // adds defs for the grid on the page
-                ColumnDefinition col1 = new ColumnDefinition();
-                RowDefinition row1 = new RowDefinition();
-                row1.Height = GridLength.Auto;
-                col1.Width = GridLength.Auto;
-                grid_button.RowDefinitions.Add(row1);
-                grid_button.ColumnDefinitions.Add(col1);
-                for (int j = 0; j < size; j++)
+                if (user_game_score_man == 0)
                 {
-                    // makes button array from the random coordinates
-                    buttonArray[i, j].SetValue(Grid.RowProperty, buttonArray[i, j].x);
-                    buttonArray[i, j].SetValue(Grid.ColumnProperty, buttonArray[i, j].y);
-                    buttonArray[i, j].Click += new RoutedEventHandler(this.click_game_event);
-                    buttonArray[i, j].Visibility = Visibility.Visible;
-                    buttonArray[i, j].Template = plain_button.Template;
-                    grid_button.Children.Add(buttonArray[i, j]); // add button
-                    Grid.SetRow(buttonArray[i, j], buttonArray[i, j].x);
-                    Grid.SetColumn(buttonArray[i, j], buttonArray[i, j].y);
+                    textblock_game_data.Text += "   | Manhattan Score:  " + "Perfect!";
+                }
+                if (user_game_score_euc == 0)
+                {
+                    textblock_game_data.Text += "   | Euclidean Score:  " + "Perfect!";
+                }
+                if (user_game_score_man > 0)
+                {
+                    textblock_game_data.Text += "   | Manhattan Score:  " + (user_game_score_man/thisGame.number_dots).ToString();
+                }
+                if (user_game_score_euc > 0)
+                {
+                    textblock_game_data.Text += "   | Euclidean Score:  " + (user_game_score_euc/thisGame.number_dots).ToString();
+                }
+
+            }
+            
+        }
+
+        public float rowbasedMinManhattanDistance(List<cooridinate> answers, List<cooridinate> selections)
+        {
+            List<float> distances = new List<float>();
+            List<List<cooridinate>> answerPairing = new List<List<cooridinate>>();
+            int selectionIndex = 0;
+            if (answers.Count == 0)
+            {
+                return 0;
+            }
+            foreach (cooridinate selection in selections)
+            {
+                List<cooridinate> answerPair = new List<cooridinate>();
+                answerPair.Add(answers[0]);
+                answerPair.Add(selection);
+                answerPairing.Add(answerPair);
+            }
+            foreach (List<cooridinate> pair in answerPairing)
+            {
+                distances.Add(computeManhattanDistance(pair[0], pair[1]));
+            }
+            float minimumDistance = distances[0];
+            for (int i = 0; i < distances.Count; i++)
+            {
+                if (distances[i] < minimumDistance)
+                {
+                    minimumDistance = Convert.ToInt32(distances[i]);
+                    selectionIndex = i;
                 }
             }
+            answers.RemoveAt(0);
+            selections.RemoveAt(selectionIndex);
+            return minimumDistance + rowbasedMinManhattanDistance(answers, selections);
         }
-        public async void clear_random_pattern(List<cooridinate> coords, custom_button[,] buttonArray, int show_button_duration)
+        public float computeEuclideanDistance(cooridinate answer, cooridinate selection)
         {
-            Console.WriteLine("clearing random pattern");
-            await Task.Delay(show_button_duration);
-            foreach (cooridinate coord in coords)
-            {
-                buttonArray[coord.x, coord.y].Template = plain_button.Template;
-            }
+            int xDist = (int)(Math.Abs(selection.x - answer.x));
+            int yDist = (int)(Math.Abs(selection.y - answer.y));
+            float hypotenuse = (float)(Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2)));
+            return hypotenuse;
         }
-        public void clear_buttons(custom_button[,] buttonArray)
+        public int computeManhattanDistance(cooridinate answer, cooridinate selection)
         {
-            Console.WriteLine("clearing buttons");
-            foreach (custom_button button in buttonArray)
-            {
-                grid_button.Children.Remove(button);
-            }
-            for (int i = 0; i < grid_button.RowDefinitions.Count; i++)
-            {
-                Console.WriteLine("removing def");
-                grid_button.RowDefinitions.Remove(grid_button.RowDefinitions[i]);
-                grid_button.ColumnDefinitions.Remove(grid_button.ColumnDefinitions[i]);
-            }
-            Console.WriteLine("Col and Row: " + grid_button.ColumnDefinitions.Count + " " + grid_button.RowDefinitions.Count);
+            int xDist = (int)(Math.Abs(selection.x - answer.x));
+            int yDist = (int)(Math.Abs(selection.y - answer.y));
+            return xDist + yDist;
         }
-        List<float> distances = new List<float>();
-        //  public float minimumDistance = 99;
         public float rowbasedMinEuclideanDistance(List<cooridinate> answers, List<cooridinate> selections)
         {
+            List<float> distances = new List<float>();
             List<List<cooridinate>> answerPairing = new List<List<cooridinate>>();
             int selectionIndex = 0;
             if (answers.Count == 0)
@@ -289,6 +269,134 @@ namespace Working_Memory_Battery_and_Sensor_Input
             //Console.WriteLine("Min Distance: " + minimumDistance);
             //thisGame.answers_to_selections_distances.Add(minimumDistance);
             return minimumDistance + rowbasedMinEuclideanDistance(answers, selections);
+        }
+        public void set_game_data()
+        {
+            if (!File.Exists("games.xml"))
+            {
+                using (XmlWriter writer = XmlWriter.Create("games.xml"))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("games");
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+            }
+            XDocument doc = XDocument.Load("games.xml");
+            XElement game = doc.Element("games");
+            game.Add(new XElement("game",
+                     new XElement("game_number", thisGame.game_number),
+                     new XElement("game_start", thisGame.game_start),
+                     new XElement("user_string", thisGame.user_string),
+                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
+                                          new XElement("user_game_score_euc", thisGame.user_game_score_euc),
+                                                               new XElement("user_game_score_euc", thisGame.user_game_score_man),
+                     new XElement("game_end", thisGame.game_end),
+                     new XElement("number_dots", thisGame.number_dots),
+                     new XElement("size", thisGame.size),
+                       new XElement("game_play_duration", thisGame.game_play_duration)));
+            doc.Save("games.xml");
+            set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+        }
+        #endregion
+        #region gameevent
+        private void click_game_event(object sender, RoutedEventArgs e)
+        {
+            number_dots_clicked += 1;
+            set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+            if (number_dots_clicked < thisGame.number_dots)
+            {
+                custom_button new_button = sender as custom_button;
+                button_array[new_button.x, new_button.y].Template = Control_Template.Template;
+                cooridinate new_coord = new cooridinate();
+                new_coord.x = new_button.x;
+                new_coord.y = new_button.y;
+                selections.Add(new_coord);
+                Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
+
+            }
+            else
+            {
+                custom_button new_button = sender as custom_button;
+                button_array[new_button.x, new_button.y].Template = Control_Template.Template;
+                cooridinate new_coord = new cooridinate();
+                new_coord.x = new_button.x;
+                new_coord.y = new_button.y;
+                selections.Add(new_coord);
+
+                List<cooridinate> answers2 = new List<cooridinate>(answers);
+                List<cooridinate> selections2 = new List<cooridinate>(selections);
+
+                thisGame.user_game_score_man = rowbasedMinManhattanDistance(answers2, selections2);
+                thisGame.user_game_score_euc = rowbasedMinEuclideanDistance(answers, selections);
+
+                thisGame.game_end = DateTime.Now;
+                thisGame.game_play_duration = thisGame.game_start - thisGame.game_end;
+                set_game_data();
+                button_next_game.Visibility = Visibility.Visible;  // games over go to the next game
+                number_dots_clicked = 0;
+            }
+        }
+        private void click_next_game_event(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Go to the next game");
+            clear_buttons(button_array);
+            
+            run_game();
+        }
+        #endregion
+        #region setting_grid_and_game
+        private void set_playing_grid_properties(int size, custom_button[,] buttonArray)
+        {
+            Console.WriteLine(button_array.ToString() + "Setting buttonArray with size: " + size);
+            // takes size of grid and the button array
+            for (int i = 0; i < size; i++)
+            {
+                // adds defs for the grid on the page
+                ColumnDefinition col1 = new ColumnDefinition();
+                RowDefinition row1 = new RowDefinition();
+                row1.Height = GridLength.Auto;
+                col1.Width = GridLength.Auto;
+                grid_button.RowDefinitions.Add(row1);
+                grid_button.ColumnDefinitions.Add(col1);
+                for (int j = 0; j < size; j++)
+                {
+                    // makes button array from the random coordinates
+                    buttonArray[i, j].SetValue(Grid.RowProperty, buttonArray[i, j].x);
+                    buttonArray[i, j].SetValue(Grid.ColumnProperty, buttonArray[i, j].y);
+                    buttonArray[i, j].Click += new RoutedEventHandler(this.click_game_event);
+                    buttonArray[i, j].Visibility = Visibility.Visible;
+                    buttonArray[i, j].Style = plain_button.Style;
+                    buttonArray[i, j].Template = plain_button.Template;
+                    grid_button.Children.Add(buttonArray[i, j]); // add button
+                    Grid.SetRow(buttonArray[i, j], buttonArray[i, j].x);
+                    Grid.SetColumn(buttonArray[i, j], buttonArray[i, j].y);
+                }
+            }
+        }
+        public async void clear_random_pattern(List<cooridinate> coords, custom_button[,] buttonArray, int show_button_duration)
+        {
+            Console.WriteLine("clearing random pattern");
+            await Task.Delay(show_button_duration);
+            foreach (cooridinate coord in coords)
+            {
+                buttonArray[coord.x, coord.y].Template = plain_button.Template;
+            }
+        }
+        public void clear_buttons(custom_button[,] buttonArray)
+        {
+            Console.WriteLine("clearing buttons");
+            foreach (custom_button button in buttonArray)
+            {
+                grid_button.Children.Remove(button);
+            }
+            for (int i = 0; i < grid_button.RowDefinitions.Count; i++)
+            {
+                Console.WriteLine("removing def");
+                grid_button.RowDefinitions.Remove(grid_button.RowDefinitions[i]);
+                grid_button.ColumnDefinitions.Remove(grid_button.ColumnDefinitions[i]);
+            }
+            Console.WriteLine("Col and Row: " + grid_button.ColumnDefinitions.Count + " " + grid_button.RowDefinitions.Count);
         }
         private custom_button[,] get_button_array(int size)
         {
@@ -346,87 +454,14 @@ namespace Working_Memory_Battery_and_Sensor_Input
             Console.WriteLine("set_random_pattern");
             foreach (cooridinate coord in coords)
             {
-                buttonArray[coord.x, coord.y].Template = Control_Template.Template;;
+                buttonArray[coord.x, coord.y].Template = Control_Template.Template; ;
                 buttonArray[coord.x, coord.y].Visibility = Visibility.Visible;
             }
-        }
-        public float rowbasedMinManhattanDistance(List<cooridinate> answers, List<cooridinate> selections)
-        {
-            List<List<cooridinate>> answerPairing = new List<List<cooridinate>>();
-
-            int selectionIndex = 0;
-            if (answers.Count == 0)
-            {
-                return 0;
-            }
-            foreach (cooridinate selection in selections)
-            {
-                List<cooridinate> answerPair = new List<cooridinate>();
-                answerPair.Add(answers[0]);
-                answerPair.Add(selection);
-                answerPairing.Add(answerPair);
-            }
-            foreach (List<cooridinate> pair in answerPairing)
-            {
-                distances.Add(computeManhattanDistance(pair[0], pair[1]));
-            }
-            float minimumDistance = distances[0];
-            for (int i = 0; i < distances.Count; i++)
-            {
-                if (distances[i] < minimumDistance)
-                {
-                    minimumDistance = Convert.ToInt32(distances[i]);
-                    selectionIndex = i;
-                }
-            }
-            answers.RemoveAt(0);
-            selections.RemoveAt(selectionIndex);
-            return minimumDistance + rowbasedMinManhattanDistance(answers, selections);
-        }
-        public void set_game_data()
-        {
-            if (!File.Exists("games.xml"))
-            {
-                using (XmlWriter writer = XmlWriter.Create("games.xml"))
-                {
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("games");
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
-                }
-            }
-            XDocument doc = XDocument.Load("games.xml");
-            XElement game = doc.Element("games");
-            game.Add(new XElement("game",
-                     new XElement("game_number", thisGame.game_number),
-                     new XElement("game_start", thisGame.game_start),
-                     new XElement("user_string", thisGame.user_string),
-                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                                          new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                                                               new XElement("user_game_score_euc", thisGame.user_game_score_man),
-                     new XElement("game_end", thisGame.game_end),
-                     new XElement("number_dots", thisGame.number_dots),
-                     new XElement("size", thisGame.size),
-                       new XElement("game_play_duration", thisGame.game_play_duration)));
-            doc.Save("games.xml");
-            set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man , thisGame.show_button_duration);
-        }
-        public float computeEuclideanDistance(cooridinate answer, cooridinate selection)
-        {
-            int xDist = (int)(Math.Abs(selection.x - answer.x));
-            int yDist = (int)(Math.Abs(selection.y - answer.y));
-            float hypotenuse = (float)(Math.Sqrt(Math.Pow(xDist, 2) + Math.Pow(yDist, 2)));
-            return hypotenuse;
-        }
-        public int computeManhattanDistance(cooridinate answer, cooridinate selection)
-        {
-            int xDist = (int)(Math.Abs(selection.x - answer.x));
-            int yDist = (int)(Math.Abs(selection.y - answer.y));
-            return xDist + yDist;
         }
         public void set_mainwindow(MainWindow mw)
         {
             thisMainWindow = mw;
         }
     }
+        #endregion
 }

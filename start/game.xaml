@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
      
 	Title="Game" >
-    <Grid Name="cp_game"  ShowGridLines="True" >
+    <Grid Name="cp_game" ShowGridLines="False" >
         <Grid.RowDefinitions>
             <RowDefinition Height="450" />
             <RowDefinition Height="90" />
@@ -14,17 +14,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="700" />
         </Grid.ColumnDefinitions>
-        <Grid ShowGridLines="False" VerticalAlignment="Center" HorizontalAlignment="Center" Name="grid_game" Grid.Column="0" Grid.Row="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <Grid ShowGridLines="True" Name="grid_button" Grid.Column="0" Grid.Row="0">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Name="grid_game" Grid.Column="0" Grid.Row="0" >
+            <Grid ShowGridLines="True" Name="grid_button" >
             </Grid>
             <Button Name="Control_Template"   Content="Abcd" Visibility="Hidden">
+
                 <Button.Template>
+
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <Ellipse Width="44" Height="44" Fill="Black"/>
@@ -33,6 +29,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
             <Button Name="plain_button"  Width="100" Height="100" Content="Abcd" Visibility="Hidden">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -43,18 +40,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <!--<Button Name="plain_button"  Width="100" Height="100" Content="Abcd" Visibility="Hidden">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Rectangle Fill="White"/>
-                            <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>-->            
-        </Grid>
-        <Grid Name="grid_game_controls"  ShowGridLines="False"  Margin="0,20,0,0" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
+        </StackPanel>
+        <Grid Name="grid_game_controls"  ShowGridLines="False"  Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -64,9 +51,15 @@
 
             </Grid.ColumnDefinitions>
 
-            <Button Name="button_next_game" HorizontalAlignment="Center" Width="100" Grid.Column="0" Grid.Row="0" Visibility="Hidden" Click="click_next_game_event">Next</Button>
-            <TextBlock Name="textblock_game_data" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"></TextBlock>
+            <Button Name="button_next_game" HorizontalAlignment="Center" Width="auto" Grid.Column="0" Grid.Row="0" Visibility="Hidden" Click="click_next_game_event">Next</Button>
+
+            <TextBlock Name="textblock_game_data" Margin="10" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"></TextBlock>
         </Grid>
-        
+
     </Grid>
+
+
+
+
+
 </Page>

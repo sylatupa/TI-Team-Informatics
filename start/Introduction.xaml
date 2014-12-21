@@ -26,10 +26,11 @@
         </StackPanel>
         <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_intro" Visibility="Hidden">
                         <Button Name="button_intro_next" Click="button_click_pre_game_next">Next</Button>
-            <Image  Name="image_slide1" Source="/images/slide1.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
-            <Image  Name="image_slide2" Source="/images/slide2.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
-            <Image  Name="image_slide3" Source="/images/slide3.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
-            <Image  Name="image_slide4" Source="/images/slide4.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+
+            <Image  Name="image_slide1" Source="/images/slide1.png" Width="444" Height="444"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Panel.ZIndex="5"></Image>
+            <Image  Panel.ZIndex="4" Name="image_slide2" Source="/images/slide2.png" Width="444" Height="444"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+            <Image Panel.ZIndex="3" Name="image_slide3" Source="/images/slide3.png" Width="444" Height="444"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
+            <Image Panel.ZIndex="2" Name="image_slide4" Source="/images/slide4.png" Width="auto" Height="auto"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></Image>
         </StackPanel>
 
         <StackPanel  Grid.Column="0"   Grid.Row="0" Name="cp_pregame_select_user" Visibility="Hidden">
@@ -38,6 +39,6 @@
             <Button Name="button_user_next" Click="button_click_user_next">Next</Button>
             <!--<Button Name="button_user_prev" Click="button_click_user_prev">Prev</Button>-->
         </StackPanel>
-
+ 
     </Grid>    
 </Page>

@@ -65,31 +65,20 @@ namespace Working_Memory_Battery_and_Sensor_Input
             num_intro_slides++;
             if (num_intro_slides == 2)
             {
-                image_slide1.Visibility = Visibility.Hidden;
-                image_slide2.Visibility = Visibility.Visible;
-                image_slide3.Visibility = Visibility.Hidden;
-                image_slide4.Visibility = Visibility.Hidden;
-                Console.WriteLine(num_intro_slides + "in");
+
+                cp_pregame_intro.Children.Remove(image_slide1);
             }
             if (num_intro_slides == 3)
             {
-                image_slide1.Visibility = Visibility.Hidden;
-                image_slide2.Visibility = Visibility.Hidden;
-                image_slide3.Visibility = Visibility.Visible;
-                image_slide4.Visibility = Visibility.Hidden;
-                Console.WriteLine(num_intro_slides + "in");
+                cp_pregame_intro.Children.Remove(image_slide2);
             }
             if (num_intro_slides == 4)
             {
-                image_slide1.Visibility = Visibility.Hidden;
-                image_slide2.Visibility = Visibility.Hidden;
-                image_slide3.Visibility = Visibility.Hidden;
-                image_slide4.Visibility = Visibility.Visible;
-                Console.WriteLine(num_intro_slides + "in");
+                cp_pregame_intro.Children.Remove(image_slide3);
             }
             if (num_intro_slides > 4)
             {
-                image_slide4.Visibility = Visibility.Hidden;
+                cp_pregame_intro.Children.Remove(image_slide4);
                 cp_pregame_intro_intro.Visibility = Visibility.Hidden;
                 cp_pregame_intro.Visibility = Visibility.Visible;
                 thisMainWindow.get_survey_page(null, new RoutedEventArgs());
