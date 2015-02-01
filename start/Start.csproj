@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="emotiv.cs" />
     <Compile Include="survey.xaml.cs">
       <DependentUpon>survey.xaml</DependentUpon>
     </Compile>
@@ -116,8 +117,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="main_HA.cs" />
-    <Compile Include="main_WMB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
