@@ -84,4 +84,28 @@
     <size>6</size>
     <game_play_duration>-PT6.9934S</game_play_duration>
   </game>
+  <game>
+    <game_number>280247</game_number>
+    <game_start>2015-02-08T13:53:49.4045618-07:00</game_start>
+    <user_string></user_string>
+    <user_game_score_euc>0</user_game_score_euc>
+    <user_game_score_euc>0</user_game_score_euc>
+    <user_game_score_euc>0</user_game_score_euc>
+    <game_end>2015-02-08T13:53:56.8313044-07:00</game_end>
+    <number_dots>3</number_dots>
+    <size>5</size>
+    <game_play_duration>-PT7.4267426S</game_play_duration>
+  </game>
+  <game>
+    <game_number>66246</game_number>
+    <game_start>2015-02-08T13:53:58.5664779-07:00</game_start>
+    <user_string></user_string>
+    <user_game_score_euc>7.019765</user_game_score_euc>
+    <user_game_score_euc>7.019765</user_game_score_euc>
+    <user_game_score_euc>9</user_game_score_euc>
+    <game_end>2015-02-08T13:54:25.0461256-07:00</game_end>
+    <number_dots>4</number_dots>
+    <size>6</size>
+    <game_play_duration>-PT26.4796477S</game_play_duration>
+  </game>
 </games>

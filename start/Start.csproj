@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="custom_button_class.cs" />
     <Compile Include="emotiv.cs" />
     <Compile Include="survey.xaml.cs">
       <DependentUpon>survey.xaml</DependentUpon>
@@ -101,7 +102,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="custom_button_class.cs" />
     <Compile Include="grid_class.cs" />
     <Compile Include="game.xaml.cs">
       <DependentUpon>game.xaml</DependentUpon>

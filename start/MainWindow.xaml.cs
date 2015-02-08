@@ -30,8 +30,8 @@ namespace Working_Memory_Battery_and_Sensor_Input
         {
             InitializeComponent();
             Main main = new Main();
-            //emotiv.get_tcp();
-            emotiv.StartListening();
+            emotiv.get_tcp();
+            //emotiv.StartListening();
             main.main();
             //Console.WriteLine("Starting Main");
             set_button_navigation(this, new RoutedEventArgs());

@@ -5,91 +5,67 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
-using System.Threading;  //TI added
+using System.Threading;
+using System.IO;  //TI added
 
 namespace Working_Memory_Battery_and_Sensor_Input
 {
+    class PAD
+    {
+        public double P;
+        public double A;
+        public double D;
+
+    }
+
     class emotiv
     {
-        string hostname = "localhost";
-        int port = 7575;
+        List<PAD> pad_list = new List<PAD>();
+        public string new_line = null;
+        public string[] strArr = null;
+        
+
         public Socket workSocket = null;
         public const int BufferSize = 1024;
         public byte[] buffer = new byte[BufferSize];
         public StringBuilder sb = new StringBuilder();
- 
         public void get_tcp()
         {
-            IPAddress ipAd = IPAddress.Parse("127.0.0.1");
-            TcpListener myList = new TcpListener(ipAd, 7474);
-            //IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
-            myList.Start();
-            while (true)
+            try
             {
-                Console.WriteLine("here");
-                Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
-                socket.Bind(ipAd);
-                socket.Listen(myList);
-                //TcpClient tcpClient = myList.AcceptTcpClient();
-                Console.WriteLine(socket.ToString());
-                byte[] bytes = new byte[256];
-                Console.WriteLine("here");
-                //NetworkStream stream = tcpClient.GetStream();
-                //stream.Read(bytes, 0, bytes.Length);
-                Console.WriteLine(bytes);
+                TcpClient tcpclnt = new TcpClient();
+                tcpclnt.Connect("127.0.0.1", 7474);
+                while (true)
+                {
+                    Stream stm = tcpclnt.GetStream();
+                    byte[] bb = new byte[100];
+                    int k = stm.Read(bb, 0, 100);
+                
+                    for (int i = 0; i < k; i++)
+                    {
+                        Console.Write(Convert.ToChar(bb[i]));
+                        new_line += Convert.ToChar(bb[i]).ToString();
+                    }
+                    Console.WriteLine(new_line.Length.ToString());
+                    char[] splitchar = { ',' };
+                    strArr = new_line.Split(splitchar);
+                    PAD pad = new PAD();
+                    Console.WriteLine(strArr.Length);
+                    
+                    pad.P = Convert.ToDouble(strArr[1]);
+                    pad.A = Convert.ToDouble(strArr[2]);
+                    pad.D= Convert.ToDouble(strArr[3]);
+                    pad_list.Add(pad);
+
+                    Console.WriteLine(pad_list.Count.ToString());
+                }
+                tcpclnt.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error..... " + e.StackTrace);
             }
         }
- 
     }
+
 }
-/*
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-
-public class TCPclient {
-    public static void main(String[] args) throws IOException {
-
-    Socket client = null;
-    BufferedReader input = null;
-    stop = false;
-    Object measureLocal;
-    try {  
-      client = new Socket(InetAddress.getByName(Ip), port);
-      input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-      client.setSoTimeout(SO_TIMEOUT);
-    } catch (Exception ex) {
-      stop = true;
-    }
-    // loop
-    while (!stop) {
-      try {
-        //
-        measureLocal = input.readLine();
-        //
-      } catch (Exception sce) {
-        break;
-      }
-      if (measureLocal == null) {
-        stop = true;
-      } else { 
-         // HERE YOU CAN DO SOMETHING WITH THE VALUE….
-      }
-      try {
-        Thread.sleep(delay);
-      } catch (Exception ex) {
-      }
-    }
-    try {      
-      if (input!=null) input.close();
-      if (client!=null) client.close();
-    } catch (Exception e) {  
-
-    } 
-    
-  }
-}
-*/
