@@ -27,4 +27,13 @@
     <name />
     <sleep />
   </user>
+  <user>
+    <age />
+    <ethnicity />
+    <gender />
+    <name />
+    <reason />
+    <name />
+    <sleep />
+  </user>
 </Users>

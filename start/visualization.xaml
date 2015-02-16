@@ -7,7 +7,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="visualization">
     <Grid Name="cp_visualization" Margin="10" ShowGridLines="False" >
-        <Grid Name="grid_table" Margin="10" ShowGridLines="True"  Grid.Column="1" Grid.Row="1">
+            <Grid Name="grid_table" Margin="10" ShowGridLines="True"  Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>

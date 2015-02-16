@@ -24,7 +24,14 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public visualization()
         {
             InitializeComponent();
-            set_bar_movement();
+         //   set_bar_movement();
+        }
+        public void move(double[] data)
+        {
+            //Console.WriteLine("moving data : " + data.ToString());
+            bar_Attention.Height = data[1];
+            bar_Dominance.Height = data[2];
+                bar_Pleasure.Height = data[0];
         }
 
         public async void set_bar_movement()

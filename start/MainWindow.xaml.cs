@@ -23,19 +23,23 @@ namespace Working_Memory_Battery_and_Sensor_Input
         /// </summary>
         Introduction page_introduction = new Introduction();
         public Game page_game = new Game();
+        
         survey page_survey = new survey();
         visualization page_visualization = new visualization();
-        emotiv emotiv = new emotiv();
+        
+
         public MainWindow()
         {
             InitializeComponent();
             Main main = new Main();
-            emotiv.get_tcp();
+            
             //emotiv.StartListening();
             main.main();
+            page_game.set_visualization(page_visualization);
             //Console.WriteLine("Starting Main");
             set_button_navigation(this, new RoutedEventArgs());
             get_intro_page(this, new RoutedEventArgs());
+            
             // the ask game 
             // else introduction, survey
             // else get survey

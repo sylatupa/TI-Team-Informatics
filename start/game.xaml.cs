@@ -46,6 +46,15 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public TimeSpan game_play_duration;
         public float user_game_score_euc;
         public float user_game_score_man;
+        public float P_Max;
+        public float P_Min;
+        public float P_Avg;
+        public float A_Max;
+        public float A_Min;
+        public float A_Avg;
+        public float D_Max;
+        public float D_Min;
+        public float D_Avg;
         public DateTime last_clicked;
         public DateTime current_click;
         public float seconds_since_last_clicked;
@@ -53,6 +62,8 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public int number_dots;
         public int show_button_duration;
         public List<float> answers_to_selections_distances = new List<float>();
+        public emotiv emotiv = new emotiv();
+
     }
     #endregion
     public partial class Game : Page
@@ -74,6 +85,9 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public List<LevelData> level_data_array;
         public Game_object thisGame;
         Dictionary<string, int[]> dictionary;
+
+        public visualization public_this_vis;
+
         int[] engagement = { 1, 1, 1 };
         int[] boredom = { -1, -1, -1 };
         int[] frustration = { -1, 1, -1 };
@@ -111,7 +125,15 @@ namespace Working_Memory_Battery_and_Sensor_Input
             level_data_array.Add(level1);
             current_level_number = level_data_array.Count;
             number_dots_clicked = 0;
+
+
+
         }
+        public void set_visualization(visualization this_vis)
+        {
+            public_this_vis = this_vis;
+        }
+
         public void run_game()
         {
             Console.WriteLine("Running Game");
@@ -125,6 +147,8 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 button_next_game.Visibility = Visibility.Hidden;
 
                 thisGame = new Game_object();
+
+
                 thisGame.size = current_level.size;
                 thisGame.number_dots = current_level.number_dots;
                 thisGame.show_button_duration = current_level.show_button_duration;
@@ -137,6 +161,9 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 clear_random_pattern(answers, button_array, thisGame.show_button_duration);
                 thisGame.game_start = DateTime.Now;
                 thisGame.game_number = (int)number.Next(0, 999999);
+                thisGame.emotiv.set_visualization(public_this_vis);
+                thisGame.emotiv.get_tcp();
+
             }
             else
             {
@@ -152,7 +179,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
             textblock_game_data.Text = "";
             textblock_game_data.Text += "   | Buttons Visable for:  " + (show_button_duration / 1000).ToString() + " seconds";
-            textblock_game_data.Text = "Size: " + size.ToString() +"X"+ size.ToString() + " Grid";
+            textblock_game_data.Text = "Size: " + size.ToString() + "X" + size.ToString() + " Grid";
             textblock_game_data.Text += "   | Dots:  " + this_number_dots.ToString() + "/" + thisGame.number_dots.ToString();
             if (this_number_dots < thisGame.number_dots)
             {
@@ -169,15 +196,15 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 }
                 if (user_game_score_man > 0)
                 {
-                    textblock_game_data.Text += "   | Manhattan Score:  " + (user_game_score_man/thisGame.number_dots).ToString();
+                    textblock_game_data.Text += "   | Manhattan Score:  " + (user_game_score_man / thisGame.number_dots).ToString();
                 }
                 if (user_game_score_euc > 0)
                 {
-                    textblock_game_data.Text += "   | Euclidean Score:  " + (user_game_score_euc/thisGame.number_dots).ToString();
+                    textblock_game_data.Text += "   | Euclidean Score:  " + (user_game_score_euc / thisGame.number_dots).ToString();
                 }
 
             }
-            
+
         }
 
         public float rowbasedMinManhattanDistance(List<cooridinate> answers, List<cooridinate> selections)
@@ -247,7 +274,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
             foreach (List<cooridinate> pair in answerPairing)
             {
                 distances.Add(computeEuclideanDistance(pair[0], pair[1]));
-                Console.WriteLine("Distance: " + computeEuclideanDistance(pair[0], pair[1]) + " between: " + pair[0].x + " " + pair[0].y + " " + pair[1].x + " " + pair[1].y);
+                //  Console.WriteLine("Distance: " + computeEuclideanDistance(pair[0], pair[1]) + " between: " + pair[0].x + " " + pair[0].y + " " + pair[1].x + " " + pair[1].y);
             }
             float minimumDistance = distances[0];
             for (int i = 0; i < distances.Count; i++)
@@ -272,6 +299,12 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         public void set_game_data()
         {
+            thisGame.emotiv.reading = false;
+            thisGame.emotiv.pad_stat_descr();
+            Console.WriteLine("AVG, MIN, MAX");
+            Console.WriteLine("P: " + thisGame.emotiv.p_avg + " " + thisGame.emotiv.p_min + " " + thisGame.emotiv.p_max);
+            Console.WriteLine("A: " + thisGame.emotiv.a_avg + " " + thisGame.emotiv.a_min + " " + thisGame.emotiv.a_max);
+            Console.WriteLine("D: " + thisGame.emotiv.d_avg + " " + thisGame.emotiv.d_min + " " + thisGame.emotiv.d_max);
             if (!File.Exists("games.xml"))
             {
                 using (XmlWriter writer = XmlWriter.Create("games.xml"))
@@ -294,9 +327,20 @@ namespace Working_Memory_Battery_and_Sensor_Input
                      new XElement("game_end", thisGame.game_end),
                      new XElement("number_dots", thisGame.number_dots),
                      new XElement("size", thisGame.size),
+                     new XElement("game", thisGame.emotiv.p_avg),
+            new XElement("p_min", thisGame.emotiv.p_min),
+                new XElement("p_max", thisGame.emotiv.p_max),
+            new XElement("a_avg", thisGame.emotiv.a_avg),
+                new XElement("a_min", thisGame.emotiv.a_min),
+                    new XElement("a_max", thisGame.emotiv.a_max),
+            new XElement("d_avg", thisGame.emotiv.d_avg),
+                new XElement("d_min", thisGame.emotiv.d_min),
+                    new XElement("d_max", thisGame.emotiv.d_max),
+
                        new XElement("game_play_duration", thisGame.game_play_duration)));
             doc.Save("games.xml");
             set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+
         }
         #endregion
         #region gameevent
@@ -312,8 +356,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 new_coord.x = new_button.x;
                 new_coord.y = new_button.y;
                 selections.Add(new_coord);
-                Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
-
+                //  Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
             }
             else
             {
@@ -339,16 +382,17 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         private void click_next_game_event(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Go to the next game");
+            //Console.WriteLine("Go to the next game");
+            thisGame.emotiv.reading = true;
             clear_buttons(button_array);
-            
+
             run_game();
         }
         #endregion
         #region setting_grid_and_game
         private void set_playing_grid_properties(int size, custom_button[,] buttonArray)
         {
-            Console.WriteLine(button_array.ToString() + "Setting buttonArray with size: " + size);
+            //       Console.WriteLine(button_array.ToString() + "Setting buttonArray with size: " + size);
             // takes size of grid and the button array
             for (int i = 0; i < size; i++)
             {
@@ -385,23 +429,23 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         public void clear_buttons(custom_button[,] buttonArray)
         {
-            Console.WriteLine("clearing buttons");
+            //         Console.WriteLine("clearing buttons");
             foreach (custom_button button in buttonArray)
             {
                 grid_button.Children.Remove(button);
             }
             for (int i = 0; i < grid_button.RowDefinitions.Count; i++)
             {
-                Console.WriteLine("removing def");
+                //Console.WriteLine("removing def");
                 grid_button.RowDefinitions.Remove(grid_button.RowDefinitions[i]);
                 grid_button.ColumnDefinitions.Remove(grid_button.ColumnDefinitions[i]);
             }
-            Console.WriteLine("Col and Row: " + grid_button.ColumnDefinitions.Count + " " + grid_button.RowDefinitions.Count);
+            //           Console.WriteLine("Col and Row: " + grid_button.ColumnDefinitions.Count + " " + grid_button.RowDefinitions.Count);
         }
         private custom_button[,] get_button_array(int size)
         {
             //builds the complete button grid, but hides each button
-            Console.WriteLine("Starting set button grid");
+            //Console.WriteLine("Starting set button grid");
             custom_button[,] buttonArray = new custom_button[size, size];
             for (int i = 0; i < size; i++)
             {
@@ -434,7 +478,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 coord.y = (int)num.Next(0, size);
                 foreach (cooridinate test_coord in unique)
                 {
-                    Console.WriteLine("Looping: " + test_coord.x + " " + test_coord.y);
+                    //  Console.WriteLine("Looping: " + test_coord.x + " " + test_coord.y);
                     if (test_coord.x != coord.x && test_coord.y != coord.y)
                     {
                         unique_flag = true;
@@ -442,7 +486,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 }
                 if (unique_flag == true)
                 {
-                    Console.WriteLine("Qualifying Coord: " + coord.x + " " + coord.y);
+                    //Console.WriteLine("Qualifying Coord: " + coord.x + " " + coord.y);
                     unique_flag = false;
                     unique.Add(coord);
                 }
@@ -451,7 +495,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         public void set_random_pattern(List<cooridinate> coords, string color, custom_button[,] buttonArray)
         {
-            Console.WriteLine("set_random_pattern");
+            //Console.WriteLine("set_random_pattern");
             foreach (cooridinate coord in coords)
             {
                 buttonArray[coord.x, coord.y].Template = Control_Template.Template; ;
