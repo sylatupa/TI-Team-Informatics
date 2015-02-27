@@ -24,7 +24,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public visualization()
         {
             InitializeComponent();
-         //   set_bar_movement();
+       //    set_bar_movement();
         }
         public void move(double[] data)
         {
@@ -36,12 +36,13 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
         public async void set_bar_movement()
         {
-            for (int i = 0; i < 100; i++)
-            {
+            //for (int i = 0; i < 100; i++)            {
+                while(true) {
                 await Task.Delay(700);
                 bar_Attention.Height = (int)number.Next(0, 100);
                 bar_Dominance.Height = (int)number.Next(0, 100);
                 bar_Pleasure.Height = (int)number.Next(0, 100);
-            }
+                }
+            //}
         }
 }}

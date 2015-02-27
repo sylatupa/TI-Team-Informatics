@@ -125,9 +125,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
             level_data_array.Add(level1);
             current_level_number = level_data_array.Count;
             number_dots_clicked = 0;
-
-
-
         }
         public void set_visualization(visualization this_vis)
         {
@@ -148,7 +145,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
                 thisGame = new Game_object();
 
-
                 thisGame.size = current_level.size;
                 thisGame.number_dots = current_level.number_dots;
                 thisGame.show_button_duration = current_level.show_button_duration;
@@ -163,7 +159,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 thisGame.game_number = (int)number.Next(0, 999999);
                 thisGame.emotiv.set_visualization(public_this_vis);
                 thisGame.emotiv.get_tcp();
-
             }
             else
             {
@@ -176,21 +171,21 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
         public void set_textblock_game_data(int size, int this_number_dots, float user_game_score_euc, float user_game_score_man, int show_button_duration)
         {
-
+            Console.WriteLine("putting text block data");
             textblock_game_data.Text = "";
             textblock_game_data.Text += "   | Buttons Visable for:  " + (show_button_duration / 1000).ToString() + " seconds";
-            textblock_game_data.Text = "Size: " + size.ToString() + "X" + size.ToString() + " Grid";
+            textblock_game_data.Text += "   | Size: " + size.ToString() + "X" + size.ToString() + " Grid";
             textblock_game_data.Text += "   | Dots:  " + this_number_dots.ToString() + "/" + thisGame.number_dots.ToString();
             if (this_number_dots < thisGame.number_dots)
             {
             }
             else
             {
-                if (user_game_score_man == 0)
+                if (user_game_score_man == 0 && number_dots_clicked != 0)
                 {
                     textblock_game_data.Text += "   | Manhattan Score:  " + "Perfect!";
                 }
-                if (user_game_score_euc == 0)
+                if (user_game_score_euc == 0 && number_dots_clicked != 0)
                 {
                     textblock_game_data.Text += "   | Euclidean Score:  " + "Perfect!";
                 }
@@ -378,6 +373,10 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 set_game_data();
                 button_next_game.Visibility = Visibility.Visible;  // games over go to the next game
                 number_dots_clicked = 0;
+                foreach (Button b in button_array)
+                {
+                    b.IsEnabled = false;
+                }
             }
         }
         private void click_next_game_event(object sender, RoutedEventArgs e)
@@ -412,6 +411,9 @@ namespace Working_Memory_Battery_and_Sensor_Input
                     buttonArray[i, j].Visibility = Visibility.Visible;
                     buttonArray[i, j].Style = plain_button.Style;
                     buttonArray[i, j].Template = plain_button.Template;
+
+                    buttonArray[i, j].IsEnabled = false;
+
                     grid_button.Children.Add(buttonArray[i, j]); // add button
                     Grid.SetRow(buttonArray[i, j], buttonArray[i, j].x);
                     Grid.SetColumn(buttonArray[i, j], buttonArray[i, j].y);
@@ -425,6 +427,10 @@ namespace Working_Memory_Battery_and_Sensor_Input
             foreach (cooridinate coord in coords)
             {
                 buttonArray[coord.x, coord.y].Template = plain_button.Template;
+            }
+            foreach (Button b in button_array)
+            {
+                b.IsEnabled = true;
             }
         }
         public void clear_buttons(custom_button[,] buttonArray)
@@ -478,15 +484,18 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 coord.y = (int)num.Next(0, size);
                 foreach (cooridinate test_coord in unique)
                 {
-                    //  Console.WriteLine("Looping: " + test_coord.x + " " + test_coord.y);
+                      Console.WriteLine("Looping: " + test_coord.x + " " + test_coord.y);
+                      Console.WriteLine("Thinking: " + coord.x + " " + coord.y);
+                      Console.WriteLine("unique flag: " + unique_flag.ToString());
                     if (test_coord.x != coord.x && test_coord.y != coord.y)
                     {
+                        
                         unique_flag = true;
                     }
                 }
                 if (unique_flag == true)
                 {
-                    //Console.WriteLine("Qualifying Coord: " + coord.x + " " + coord.y);
+                    Console.WriteLine("Qualifying Coord: " + coord.x + " " + coord.y);
                     unique_flag = false;
                     unique.Add(coord);
                 }

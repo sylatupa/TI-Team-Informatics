@@ -39,7 +39,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
             //Console.WriteLine("Starting Main");
             set_button_navigation(this, new RoutedEventArgs());
             get_intro_page(this, new RoutedEventArgs());
-            
+            //get_survey_page(this, new RoutedEventArgs());
             // the ask game 
             // else introduction, survey
             // else get survey

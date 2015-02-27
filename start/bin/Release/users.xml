@@ -36,4 +36,49 @@
     <name />
     <sleep />
   </user>
+  <user>
+    <age />
+    <ethnicity />
+    <gender />
+    <name />
+    <reason />
+    <name />
+    <sleep />
+  </user>
+  <user>
+    <age />
+    <ethnicity />
+    <gender />
+    <name />
+    <reason />
+    <name />
+    <sleep />
+  </user>
+  <user>
+    <age>Under 18</age>
+    <ethnicity>White</ethnicity>
+    <gender>Male</gender>
+    <name />
+    <reason>It is a class requirement</reason>
+    <name>201502271037227526</name>
+    <sleep>6 or less</sleep>
+  </user>
+  <user>
+    <age />
+    <ethnicity />
+    <gender />
+    <name />
+    <reason />
+    <name>201502271047007218</name>
+    <sleep />
+  </user>
+  <user>
+    <age />
+    <ethnicity />
+    <gender />
+    <name />
+    <reason />
+    <name>201502271055452488</name>
+    <sleep />
+  </user>
 </Users>

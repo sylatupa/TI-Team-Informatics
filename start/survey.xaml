@@ -151,14 +151,17 @@
             <TextBlock TextWrapping="Wrap" >10 or more</TextBlock>
         </RadioButton>
 
+        <!--
         <TextBox HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Name="name" Grid.ColumnSpan="3"
 		 Height="23"
-		 
+		 Name="user_id"
 		 TextWrapping="Wrap"
 		 Text=""
 		 VerticalAlignment="Top"
 		 Width="444"
-		 TextChanged="TextBox_TextChanged"/>
+		 TextChanged="TextBox_TextChanged"
+                 />
+        -->
         <Button Margin="30,30,30,30" Click="button_submit_survey" Width="222" Grid.Column="1" Grid.Row="8"  Grid.ColumnSpan="3" >Submit the Survey</Button>
 
     </Grid>

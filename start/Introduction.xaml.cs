@@ -38,13 +38,13 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         private void button_click_pre_game_no(object sender, RoutedEventArgs e)
         {
-            cp_pregame_intro_intro.Visibility = Visibility.Hidden;
+            //cp_pregame_intro_intro.Visibility = Visibility.Hidden;
             cp_pregame_intro.Visibility = Visibility.Visible;
 
         }
         private void button_click_pre_game_yes(object sender, RoutedEventArgs e)
         {
-            cp_pregame_intro_intro.Visibility = Visibility.Hidden;
+            //cp_pregame_intro_intro.Visibility = Visibility.Hidden;
 
             XDocument doc = XDocument.Load(@"users.xml");
             var persons = from p in doc.Root.Elements("user").Elements("name") select p.Value;
@@ -79,7 +79,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
             if (num_intro_slides > 4)
             {
                 cp_pregame_intro.Children.Remove(image_slide4);
-                cp_pregame_intro_intro.Visibility = Visibility.Hidden;
+                //cp_pregame_intro_intro.Visibility = Visibility.Hidden;
                 cp_pregame_intro.Visibility = Visibility.Visible;
                 thisMainWindow.get_survey_page(null, new RoutedEventArgs());
             }

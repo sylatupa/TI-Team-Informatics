@@ -40,11 +40,12 @@ namespace Working_Memory_Battery_and_Sensor_Input
         Game thisGame;
         surveyObject thisSurvey;
         MainWindow thisMainWindow;
-
+        
         public survey()
         {
             thisSurvey = new surveyObject();
             InitializeComponent();
+            
         }
         public void button_submit_survey(object sender, RoutedEventArgs e)
         {
@@ -75,17 +76,18 @@ namespace Working_Memory_Battery_and_Sensor_Input
                        new XElement("gender", thisSurvey.gender),
                        new XElement("name", thisSurvey.name),
                        new XElement("reason", thisSurvey.reason),
-                       new XElement("name", thisSurvey.name),
+                       new XElement("name", (DateTime.Now).ToString("yyyyMMddHHmmssffff")),
                        new XElement("sleep", thisSurvey.sleep)));
             doc.Save("users.xml"); 
            
         }
+        /*
         private void TextBox_TextChanged(object sender, RoutedEventArgs e)
         {
             thisSurvey.name = name.Text;
             Console.WriteLine(name.Text);
         }
-
+        */
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 

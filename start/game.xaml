@@ -15,14 +15,12 @@
             <ColumnDefinition Width="700" />
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Name="grid_game" Grid.Column="0" Grid.Row="0" >
-            <Grid ShowGridLines="True" Name="grid_button" >
-            </Grid>
+            <Grid ShowGridLines="False" Name="grid_button" />
             <Button Name="Control_Template"   Content="Abcd" Visibility="Hidden">
-
                 <Button.Template>
-
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
+                        <Grid >
+                            <Rectangle   Fill="White" Stroke="Black" StrokeThickness="0.6" RadiusX="0.1" RadiusY="0.1"/>
                             <Ellipse Width="44" Height="44" Fill="Black"/>
                             <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
@@ -34,7 +32,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Rectangle Fill="White"/>
+                            <Rectangle   Fill="White" Stroke="Black" StrokeThickness="0.6" RadiusX="0.1" RadiusY="0.1"/>
                             <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
@@ -55,11 +53,5 @@
 
             <TextBlock Name="textblock_game_data" Margin="10" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"></TextBlock>
         </Grid>
-
     </Grid>
-
-
-
-
-
 </Page>

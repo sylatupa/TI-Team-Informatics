@@ -26,7 +26,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public string new_line = null;
         public string[] strArr = null;
         public byte[] bb = null;  //byte array doesnt need to be public
-        public string incoming_data = null;
+        public string incoming_data = ""; //added from notes 
         public Socket workSocket = null;
         public const int BufferSize = 1024;
         public byte[] buffer = new byte[BufferSize];
@@ -49,43 +49,51 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public void pad_stat_descr()
         {
           //  Console.WriteLine("all data: " + incoming_data);
-            incoming_data = incoming_data.Replace("\n", "");
-            string[] by_the_second_data = incoming_data.Split(Environment.NewLine.ToCharArray());
-            double[] p = new double[by_the_second_data.Length];
-            double[] a = new double[by_the_second_data.Length];
-            double[] d = new double[by_the_second_data.Length];
-            int i = 0;
-
-            char[] splitchar = { ',' };
-            foreach (string data_row in by_the_second_data)
+            try
             {
-                try
+                incoming_data = incoming_data.Replace("\n", "");
+                string[] by_the_second_data = incoming_data.Split(Environment.NewLine.ToCharArray());
+                double[] p = new double[by_the_second_data.Length];
+                double[] a = new double[by_the_second_data.Length];
+                double[] d = new double[by_the_second_data.Length];
+                int i = 0;
+
+                char[] splitchar = { ',' };
+                foreach (string data_row in by_the_second_data)
                 {
-                    string[] strArr = data_row.Split(splitchar);
-                    //Console.WriteLine("data row: " + data_row + " " + " rowLength: " + strArr.Length);
-                    p[i] = Convert.ToDouble(strArr[1].Trim());
-                    a[i] = Convert.ToDouble(strArr[2].Trim());
-                    d[i] = Convert.ToDouble(strArr[3].Trim());
-                    i++;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Bad line of data: " + data_row);
+                    try
+                    {
+                        string[] strArr = data_row.Split(splitchar);
+                        //Console.WriteLine("data row: " + data_row + " " + " rowLength: " + strArr.Length);
+                        p[i] = Convert.ToDouble(strArr[1].Trim());
+                        a[i] = Convert.ToDouble(strArr[2].Trim());
+                        d[i] = Convert.ToDouble(strArr[3].Trim());
+                        i++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Bad line of data: " + data_row);
+
+                    }
 
                 }
+                p_avg = p.Average();
+                a_avg = a.Average();
+                d_avg = d.Average();
 
+                p_max = p.Max();
+                a_max = a.Max();
+                d_max = d.Max();
+
+                p_min = p.Min();
+                a_min = a.Min();
+                d_min = d.Min();
             }
-             p_avg = p.Average();
-             a_avg = a.Average();
-             d_avg = d.Average();
+            catch (Exception ex)
+            {
+                Console.WriteLine("no data, but keep playing");
+            }
 
-             p_max = p.Max();
-             a_max = a.Max();
-             d_max = d.Max();
-
-             p_min = p.Min();
-             a_min = a.Min();
-             d_min = d.Min();
         }
         async public void get_tcp()
         {
@@ -118,7 +126,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                             sample_data = sample_data.Replace("\n", "");
                             
                             string[] by_the_second_data = sample_data.Split(Environment.NewLine.ToCharArray());
-                            //Console.WriteLine("sample data: " + by_the_second_data[0].ToString());
+                            Console.WriteLine("sample data: " + by_the_second_data[0].ToString());
                             char[] splitchar = { ',' };
                             string[] strArr = by_the_second_data[0].Split(splitchar);
                             public_emotiv_visual.move(new double[3] { Convert.ToDouble(strArr[1].Trim()) * 100, Convert.ToDouble(strArr[2].Trim()) * 100, Convert.ToDouble(strArr[3].Trim()) * 100 });
