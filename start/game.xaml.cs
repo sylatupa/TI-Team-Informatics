@@ -87,6 +87,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         Dictionary<string, int[]> dictionary;
 
         public visualization public_this_vis;
+        public survey thisSurvey;
 
         int[] engagement = { 1, 1, 1 };
         int[] boredom = { -1, -1, -1 };
@@ -294,6 +295,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         public void set_game_data()
         {
+
             thisGame.emotiv.reading = false;
             thisGame.emotiv.pad_stat_descr();
             Console.WriteLine("AVG, MIN, MAX");
@@ -310,19 +312,20 @@ namespace Working_Memory_Battery_and_Sensor_Input
                     writer.WriteEndDocument();
                 }
             }
+
             XDocument doc = XDocument.Load("games.xml");
             XElement game = doc.Element("games");
             game.Add(new XElement("game",
                      new XElement("game_number", thisGame.game_number),
                      new XElement("game_start", thisGame.game_start),
-                     new XElement("user_string", thisGame.user_string),
+                     new XElement("user_string", thisSurvey.thisSurvey.name),
                      new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                                          new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                                                               new XElement("user_game_score_euc", thisGame.user_game_score_man),
+                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
+                     new XElement("user_game_score_man", thisGame.user_game_score_man),
                      new XElement("game_end", thisGame.game_end),
                      new XElement("number_dots", thisGame.number_dots),
                      new XElement("size", thisGame.size),
-                     new XElement("game", thisGame.emotiv.p_avg),
+                     new XElement("p_avg", thisGame.emotiv.p_avg),
             new XElement("p_min", thisGame.emotiv.p_min),
                 new XElement("p_max", thisGame.emotiv.p_max),
             new XElement("a_avg", thisGame.emotiv.a_avg),
@@ -463,12 +466,10 @@ namespace Working_Memory_Battery_and_Sensor_Input
                     button1.Background = Brushes.CornflowerBlue;
                     button1.Content = " ";
                     button1.Name = "button" + i.ToString() + "button" + j.ToString();
-                    //button1.Content = i.ToString() + "," + j.ToString();
                     button1.x = i;
                     button1.y = j;
                     button1.Visibility = Visibility.Hidden;
                     buttonArray[i, j] = button1;
-                    //button1.control_template = UIElement.
                 }
             }
             return buttonArray;
@@ -482,15 +483,17 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 cooridinate coord = new cooridinate();
                 coord.x = (int)num.Next(0, size);
                 coord.y = (int)num.Next(0, size);
+
                 foreach (cooridinate test_coord in unique)
                 {
-                      Console.WriteLine("Looping: " + test_coord.x + " " + test_coord.y);
-                      Console.WriteLine("Thinking: " + coord.x + " " + coord.y);
-                      Console.WriteLine("unique flag: " + unique_flag.ToString());
-                    if (test_coord.x != coord.x && test_coord.y != coord.y)
+                    if ((test_coord.x != coord.x ^ test_coord.y != coord.y) || (test_coord.x != coord.x && test_coord.y != coord.y)) // XOR and AND
                     {
-                        
                         unique_flag = true;
+                    }
+                    else
+                    {
+                        unique_flag = false;
+                        break;
                     }
                 }
                 if (unique_flag == true)
@@ -515,6 +518,12 @@ namespace Working_Memory_Battery_and_Sensor_Input
         {
             thisMainWindow = mw;
         }
+        public void set_survey(survey survey)
+        {
+            thisSurvey = survey;
+
+        }
+
     }
         #endregion
 }

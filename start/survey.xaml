@@ -54,8 +54,7 @@
             </TextBlock>
         </Label>
         <Label Grid.Column="0" Grid.Row="7">
-            <TextBlock TextWrapping="Wrap">Name
-            </TextBlock>
+           
         </Label>
         <RadioButton Checked="RadioButton_Checked" Grid.Column="1" Grid.Row="1" GroupName="gender"  IsChecked="False">
             <TextBlock TextWrapping="Wrap">

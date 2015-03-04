@@ -36,6 +36,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
             //emotiv.StartListening();
             main.main();
             page_game.set_visualization(page_visualization);
+            
             //Console.WriteLine("Starting Main");
             set_button_navigation(this, new RoutedEventArgs());
             get_intro_page(this, new RoutedEventArgs());
@@ -60,6 +61,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
         }
         public void get_survey_page(object sender, RoutedEventArgs e)
         {
+            page_game.set_survey(page_survey);
             page_survey.set_mainwindow(this);
             if (cp_mainwindow.Children.Contains(page_survey.cp_survey))
             {

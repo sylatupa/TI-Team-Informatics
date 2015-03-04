@@ -38,12 +38,13 @@ namespace Working_Memory_Battery_and_Sensor_Input
         /// 
         /// </summary>
         Game thisGame;
-        surveyObject thisSurvey;
+        public surveyObject thisSurvey;
         MainWindow thisMainWindow;
         
         public survey()
         {
             thisSurvey = new surveyObject();
+            thisSurvey.name = (DateTime.Now).ToString("yyyyMMddHHmmssffff");
             InitializeComponent();
             
         }
@@ -76,7 +77,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                        new XElement("gender", thisSurvey.gender),
                        new XElement("name", thisSurvey.name),
                        new XElement("reason", thisSurvey.reason),
-                       new XElement("name", (DateTime.Now).ToString("yyyyMMddHHmmssffff")),
+                       new XElement("name", thisSurvey.name),
                        new XElement("sleep", thisSurvey.sleep)));
             doc.Save("users.xml"); 
            
