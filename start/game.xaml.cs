@@ -320,7 +320,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
                      new XElement("game_start", thisGame.game_start),
                      new XElement("user_string", thisSurvey.thisSurvey.name),
                      new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
                      new XElement("user_game_score_man", thisGame.user_game_score_man),
                      new XElement("game_end", thisGame.game_end),
                      new XElement("number_dots", thisGame.number_dots),
