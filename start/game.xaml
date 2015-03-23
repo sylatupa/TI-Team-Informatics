@@ -8,8 +8,8 @@
 	Title="Game" >
     <Grid Name="cp_game" ShowGridLines="False" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="400" />
-            <RowDefinition Height="90" />
+            <RowDefinition Height="400*" />
+            <RowDefinition Height="90*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="700" />
@@ -39,10 +39,10 @@
                 </Button.Template>
             </Button>
         </StackPanel>
-        <Grid Name="grid_game_controls"  ShowGridLines="True"  Margin="5,5,5,5" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
+        <Grid Name="grid_game_controls" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="700" />
@@ -51,7 +51,7 @@
 
             <Button Name="button_next_game" HorizontalAlignment="Center" Width="auto" Grid.Column="0" Grid.Row="0" Visibility="Hidden" Click="click_next_game_event">Next</Button>
 
-            <TextBlock Name="textblock_game_data" Margin="5" Width="700" Height="70" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap">Game Output</TextBlock>
+            <TextBlock Name="textblock_game_data" Width="700" Height="70" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" TextAlignment="Center">Game Output</TextBlock>
         </Grid>
     </Grid>
 </Page>

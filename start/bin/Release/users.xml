@@ -4,396 +4,160 @@
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
+    <name>201503221618440254</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
+    <name>201503221634215613</name>
+    <sleep />
+  </user>
+  <user>
+    <age />
+    <ethnicity>Asian/Pacific Islander</ethnicity>
+    <gender />
+    <reason />
+    <name>201503221723494646</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
+    <name>201503221725197936</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
+    <name>201503221726416126</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
+    <name>201503221731514869</name>
+    <sleep />
+  </user>
+  <user>
+    <age />
+    <ethnicity>Hispanic/Latino</ethnicity>
+    <gender />
+    <reason />
+    <name>201503221733294257</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name />
-    <sleep />
-  </user>
-  <user>
-    <age>Under 18</age>
-    <ethnicity>White</ethnicity>
-    <gender>Male</gender>
-    <name />
-    <reason>It is a class requirement</reason>
-    <name>201502271037227526</name>
-    <sleep>6 or less</sleep>
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502271047007218</name>
+    <name>201503221737066694</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502271055452488</name>
+    <name>201503221739109518</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281130238608</name>
+    <name>201503221741387436</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281141338151</name>
+    <name>201503221747223840</name>
+    <sleep />
+  </user>
+  <user>
+    <age />
+    <ethnicity>Asian/Pacific Islander</ethnicity>
+    <gender />
+    <reason />
+    <name>201503221749000129</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281144459241</name>
+    <name>201503221752228759</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281146572096</name>
+    <name>201503221755454249</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281151077780</name>
+    <name>201503221756329419</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281200375626</name>
+    <name>201503221757136929</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281204518481</name>
+    <name>201503221758107689</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281208187009</name>
+    <name>201503221758551252</name>
     <sleep />
   </user>
   <user>
     <age />
     <ethnicity />
     <gender />
-    <name />
     <reason />
-    <name>201502281215297066</name>
+    <name>201503221800218379</name>
     <sleep />
   </user>
   <user>
     <age />
-    <ethnicity />
+    <ethnicity>Hispanic/Latino</ethnicity>
     <gender />
-    <name />
     <reason />
-    <name>201502281225597556</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281228069409</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281234428995</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281308537398</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281319425060</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281323348072</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281335565687</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281336529839</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281337556175</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281345492226</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281347295033</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281347502585</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name />
-    <reason />
-    <name>201502281404308977</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502281413506737</name>
-    <reason />
-    <name>201502281413506737</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502281415083442</name>
-    <reason />
-    <name>201502281415083442</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282042263168</name>
-    <reason />
-    <name>201502282042263168</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282045058270</name>
-    <reason />
-    <name>201502282045058270</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282058124890</name>
-    <reason />
-    <name>201502282058124890</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282103540995</name>
-    <reason />
-    <name>201502282103540995</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282104247443</name>
-    <reason />
-    <name>201502282104247443</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282108353706</name>
-    <reason />
-    <name>201502282108353706</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282116170860</name>
-    <reason />
-    <name>201502282116170860</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282117105811</name>
-    <reason />
-    <name>201502282117105811</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282118581982</name>
-    <reason />
-    <name>201502282118581982</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282120032019</name>
-    <reason />
-    <name>201502282120032019</name>
-    <sleep />
-  </user>
-  <user>
-    <age />
-    <ethnicity />
-    <gender />
-    <name>201502282123216653</name>
-    <reason />
-    <name>201502282123216653</name>
+    <name>201503221802010248</name>
     <sleep />
   </user>
 </Users>

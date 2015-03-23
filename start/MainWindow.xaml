@@ -43,13 +43,14 @@
                 </Button.Template>
             </Button>
         </StackPanel>
-        <StackPanel Margin="10, 20, 5, 5" Grid.Column="0" Grid.Row="0"  Name="cp_mainwindow_navigation">
+        <StackPanel Grid.Column="0" Grid.Row="0"  Name="cp_mainwindow_navigation">
             <Button Name="button_get_intro_page" Click="get_intro_page">Intro</Button>
             <Button Name="button_get_survey_page" Click="get_survey_page">Survey</Button>
             <Button Name="button_get_game_page" Click="get_game_page">Start Game</Button>
             <Button Name="button_get_visualization" Click="get_visualization">Chart</Button>
         </StackPanel>
         <Grid Name="cp_mainwindow" Background="White" Margin="10 10 10 10"  Grid.Column="1" Grid.Row="0" ShowGridLines="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
            
         </Grid>
         <StackPanel Margin="10"  Grid.Column="1" Grid.Row="1"  Name="cp_mainwindow_footer">

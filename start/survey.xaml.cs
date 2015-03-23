@@ -75,7 +75,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
                        new XElement("age", thisSurvey.age),
                        new XElement("ethnicity", thisSurvey.ethnicity),
                        new XElement("gender", thisSurvey.gender),
-                       new XElement("name", thisSurvey.name),
                        new XElement("reason", thisSurvey.reason),
                        new XElement("name", thisSurvey.name),
                        new XElement("sleep", thisSurvey.sleep)));

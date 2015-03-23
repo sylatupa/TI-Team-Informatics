@@ -19,7 +19,6 @@ using System.Xml.Linq;
 
 namespace Working_Memory_Battery_and_Sensor_Input
 {
-    #region data_classes
     public class LevelData
     {
         public int size;
@@ -46,6 +45,10 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public TimeSpan game_play_duration;
         public float user_game_score_euc;
         public float user_game_score_man;
+
+        public float user_game_score_euc_combo;
+        public float user_game_score_man_combo;
+
         public float P_Max;
         public float P_Min;
         public float P_Avg;
@@ -65,10 +68,8 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public emotiv emotiv = new emotiv();
 
     }
-    #endregion
     public partial class Game : Page
     {
-        #region variables_instance
         public Random num = new Random();
         public Random number = new Random();
         public custom_button[,] button_array;
@@ -97,8 +98,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
         int[] concentrating = { 1, -1, 1 };
         int[] disagreement = { -1, 1, 1 };
         int[] interested = { 1, 1, -1 };
-        #endregion
-        #region game_main
         public Game()
         {
 
@@ -117,9 +116,11 @@ namespace Working_Memory_Battery_and_Sensor_Input
             answers = new List<cooridinate>();
             selections = new List<cooridinate>();
 
-            level1 = new LevelData(5, 3, 4444);
-            level2 = new LevelData(6, 4, 4444);
-            level3 = new LevelData(7, 5, 4444);
+            // (size,dots, and, duration ms) 
+            // heres the levels that are created, 
+            level1 = new LevelData(5, 3, 3000);
+            level2 = new LevelData(6, 4, 3000);
+            level3 = new LevelData(7, 5, 3000);
             level_data_array = new List<LevelData>();
             level_data_array.Add(level3);
             level_data_array.Add(level2);
@@ -150,7 +151,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 thisGame.number_dots = current_level.number_dots;
                 thisGame.show_button_duration = current_level.show_button_duration;
 
-                set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+                set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.user_game_score_euc_combo, thisGame.user_game_score_man_combo, thisGame.show_button_duration);
                 button_array = get_button_array(thisGame.size);
                 set_playing_grid_properties(thisGame.size, button_array);
                 answers = get_random_coordinate_array(thisGame.size, thisGame.number_dots);
@@ -167,40 +168,23 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 run_game();
             }
         }
-        #endregion
-        #region reporting_and_scoring
 
-        public void set_textblock_game_data(int size, int this_number_dots, float user_game_score_euc, float user_game_score_man, int show_button_duration)
+        public void set_textblock_game_data(int size, int this_number_dots, float user_game_score_euc, float user_game_score_man, float user_game_score_euc_combo, float user_game_score_man_combo, int show_button_duration)
         {
-            Console.WriteLine("putting text block data");
             textblock_game_data.Text = "";
             textblock_game_data.Text += "   | Buttons Visable for:  " + (show_button_duration / 1000).ToString() + " seconds";
             textblock_game_data.Text += "   | Size: " + size.ToString() + "X" + size.ToString() + " Grid";
-            textblock_game_data.Text += "   | Dots:  " + this_number_dots.ToString() + "/" + thisGame.number_dots.ToString();
+            textblock_game_data.Text += "   | Dots:  " + this_number_dots.ToString() + "/" + thisGame.number_dots.ToString() + " |";
             if (this_number_dots < thisGame.number_dots)
             {
             }
             else
             {
-                if (user_game_score_man == 0 && number_dots_clicked != 0)
-                {
-                    textblock_game_data.Text += "   | Manhattan Score:  " + "Perfect!";
-                }
-                if (user_game_score_euc == 0 && number_dots_clicked != 0)
-                {
-                    textblock_game_data.Text += "   | Euclidean Score:  " + "Perfect!";
-                }
-                if (user_game_score_man > 0)
-                {
-                    textblock_game_data.Text += "   | Manhattan Score:  " + (user_game_score_man / thisGame.number_dots).ToString();
-                }
-                if (user_game_score_euc > 0)
-                {
-                    textblock_game_data.Text += "   | Euclidean Score:  " + (user_game_score_euc / thisGame.number_dots).ToString();
-                }
-
+                    textblock_game_data.Text += "\n | Manhattan Score A:  " + (user_game_score_man / thisGame.number_dots).ToString();
+                    textblock_game_data.Text += "   | Manhattan Score B:  " + (user_game_score_man_combo / thisGame.number_dots).ToString();
+                    textblock_game_data.Text += "\n   | Euclidean Score A:  " + (user_game_score_euc / thisGame.number_dots).ToString() + " |";
+                    textblock_game_data.Text += "   | Euclidean Score B:  " + (user_game_score_euc_combo / thisGame.number_dots).ToString() + " |";
             }
-
         }
 
         public float rowbasedMinManhattanDistance(List<cooridinate> answers, List<cooridinate> selections)
@@ -289,7 +273,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
             }
             //Console.WriteLine("selection index: " + selectionIndex);
             //thisGame.answers_to_selections_distances
-            //Console.WriteLine("Min Distance: " + minimumDistance);
             //thisGame.answers_to_selections_distances.Add(minimumDistance);
             return minimumDistance + rowbasedMinEuclideanDistance(answers, selections);
         }
@@ -316,14 +299,19 @@ namespace Working_Memory_Battery_and_Sensor_Input
             XDocument doc = XDocument.Load("games.xml");
             XElement game = doc.Element("games");
             game.Add(new XElement("game",
-                     new XElement("game_number", thisGame.game_number),
-                     new XElement("game_start", thisGame.game_start),
-                     new XElement("user_string", thisSurvey.thisSurvey.name),
-                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
-                     new XElement("user_game_score_man", thisGame.user_game_score_man),
-                     new XElement("game_end", thisGame.game_end),
+                new XElement("user_string", thisSurvey.thisSurvey.name),
+                new XElement("game_number", thisGame.game_number),
+                new XElement("game_duration", thisGame.show_button_duration),
+
+
                      new XElement("number_dots", thisGame.number_dots),
                      new XElement("size", thisGame.size),
+                     new XElement("user_game_score_euc", thisGame.user_game_score_euc),
+                     new XElement("user_game_score_man", thisGame.user_game_score_man),
+                     new XElement("user_game_score_euc_combo", thisGame.user_game_score_euc_combo),
+                     new XElement("user_game_score_man_combo", thisGame.user_game_score_man_combo),
+
+
                      new XElement("p_avg", thisGame.emotiv.p_avg),
             new XElement("p_min", thisGame.emotiv.p_min),
                 new XElement("p_max", thisGame.emotiv.p_max),
@@ -333,27 +321,27 @@ namespace Working_Memory_Battery_and_Sensor_Input
             new XElement("d_avg", thisGame.emotiv.d_avg),
                 new XElement("d_min", thisGame.emotiv.d_min),
                     new XElement("d_max", thisGame.emotiv.d_max),
-
+                    new XElement("game_start", thisGame.game_start),
+                                         new XElement("game_end", thisGame.game_end),
                        new XElement("game_play_duration", thisGame.game_play_duration)));
             doc.Save("games.xml");
-            set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+            set_textblock_game_data(thisGame.size, thisGame.number_dots, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.user_game_score_euc_combo, thisGame.user_game_score_man_combo, thisGame.show_button_duration);
 
         }
-        #endregion
-        #region gameevent
         private void click_game_event(object sender, RoutedEventArgs e)
         {
             number_dots_clicked += 1;
-            set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.show_button_duration);
+            set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.user_game_score_euc_combo, thisGame.user_game_score_man_combo, thisGame.show_button_duration);
             if (number_dots_clicked < thisGame.number_dots)
             {
                 custom_button new_button = sender as custom_button;
                 button_array[new_button.x, new_button.y].Template = Control_Template.Template;
+                button_array[new_button.x, new_button.y].IsEnabled = false;
                 cooridinate new_coord = new cooridinate();
                 new_coord.x = new_button.x;
                 new_coord.y = new_button.y;
                 selections.Add(new_coord);
-                //  Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
+                  Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
             }
             else
             {
@@ -365,20 +353,31 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 selections.Add(new_coord);
 
                 List<cooridinate> answers2 = new List<cooridinate>(answers);
+                List<cooridinate> answers3 = new List<cooridinate>(answers);
+                List<cooridinate> answers4 = new List<cooridinate>(answers);
                 List<cooridinate> selections2 = new List<cooridinate>(selections);
+                List<cooridinate> selections3 = new List<cooridinate>(selections);
+                List<cooridinate> selections4 = new List<cooridinate>(selections);
 
                 thisGame.user_game_score_man = rowbasedMinManhattanDistance(answers2, selections2);
                 thisGame.user_game_score_euc = rowbasedMinEuclideanDistance(answers, selections);
 
+                thisGame.user_game_score_man_combo = combinationMinManhattanDistance(answers3, selections3);
+                thisGame.user_game_score_euc_combo = combinationMinEuclideanDistance(answers4, selections4);
+
+
                 thisGame.game_end = DateTime.Now;
                 thisGame.game_play_duration = thisGame.game_start - thisGame.game_end;
-                set_game_data();
+
                 button_next_game.Visibility = Visibility.Visible;  // games over go to the next game
                 number_dots_clicked = 0;
+
                 foreach (Button b in button_array)
                 {
                     b.IsEnabled = false;
                 }
+
+                set_game_data();
             }
         }
         private void click_next_game_event(object sender, RoutedEventArgs e)
@@ -389,8 +388,6 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
             run_game();
         }
-        #endregion
-        #region setting_grid_and_game
         private void set_playing_grid_properties(int size, custom_button[,] buttonArray)
         {
             //       Console.WriteLine(button_array.ToString() + "Setting buttonArray with size: " + size);
@@ -523,6 +520,211 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
         }
 
+
+        // new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below// new scoring code below
+
+
+        // new scoring code below
+
+
+        public float combinationMinEuclideanDistance(List<cooridinate> answers, List<cooridinate> selections)
+        {
+            float[] pairings = createEuclideanMatrix(answers, selections);
+
+            int fact = factorial(answers.Count);
+            float[] distances = new float[fact]; // list to store distance combinations
+            for (int i = 0; i < distances.Length; i++)
+                distances[i] = -1;
+
+            int[] taboo = new int[answers.Count]; // array to store temporarily disallowed indices
+            for (int i = 0; i < taboo.Length; i++)
+                taboo[i] = -1;
+
+            int index = 0;
+            createCombos(ref distances, pairings, 0, taboo, answers.Count, 0, ref index);
+            
+            float minDistance = Single.MaxValue;
+            for (int i = 0; i < distances.Length; i++)
+            {
+                if (distances[i] < minDistance)
+                {
+                    minDistance = distances[i];
+                }
+            }
+
+            return minDistance;
+
+        }
+
+        public int combinationMinManhattanDistance(List<cooridinate> answers, List<cooridinate> selections)
+        {
+            int[] pairings = createManhattanMatrix(answers, selections);
+
+            int fact = factorial(answers.Count);
+            int[] distances = new int[fact]; // list to store distance combinations
+            for (int i = 0; i < distances.Length; i++)
+                distances[i] = -1;
+
+            int[] taboo = new int[answers.Count]; // array to store temporarily disallowed indices
+            for (int i = 0; i < taboo.Length; i++)
+                taboo[i] = -1;
+
+            int index = 0;
+            createCombos(ref distances, pairings, 0, taboo, answers.Count, 0, ref index);
+
+            float maxFloat = Single.MaxValue;
+            int minDistance = (int)maxFloat - 1;
+            for (int i = 0; i < distances.Length; i++)
+            {
+                if (distances[i] < minDistance)
+                {
+                    minDistance = distances[i];
+                }
+            }
+
+            return minDistance;
+
+        }
+        public int factorial(int value)
+        {
+            int fact = 1;
+            for (int i = value; i > 0; i--)
+                fact *= i;
+            return fact;
+        }
+
+        public float[] createEuclideanMatrix(List<cooridinate> answers, List<cooridinate> selections)
+        {
+            // create a list to hold the distances between all possible answer/selection pairs
+            float[] pairings = new float[answers.Count * selections.Count];
+            for (int i = 0; i < answers.Count; i++)
+            {
+                for (int j = 0; j < selections.Count; j++)
+                {
+                    // answer/selection pair (e.g. a1s1, ..., a1sn)
+                    float dist = computeEuclideanDistance(answers[i], selections[j]);
+                    pairings[i * selections.Count + j] = dist;
+                }
+            }
+
+            // this is a matrix containing distances between answers and selections
+            // has the form (a1s1, a1s2, ..., a1sn, ..., ans1, ans2, ..., ansn)
+            return pairings;
+        }
+
+        public int[] createManhattanMatrix(List<cooridinate> answers, List<cooridinate> selections)
+        {
+            // create a list to hold the distances between all possible answer/selection pairs
+            int[] matrix = new int[answers.Count * selections.Count];
+            for (int i = 0; i < answers.Count; i++)
+            {
+                for (int j = 0; j < selections.Count; j++)
+                {
+                    // answer/selection pair (e.g. a1s1, ..., a1sn)
+                    int dist = computeManhattanDistance(answers[i], selections[j]);
+                    matrix[i * selections.Count + j] = dist;
+                }
+            }
+
+            // this is a matrix containing distances between answers and selections
+            // has the form (a1s1, a1s2, ..., a1sn, ..., ans1, ans2, ..., ansn)
+            return matrix;
+        }
+        public void createCombos(ref float[] distances, float[] pairings, float temp, int[] taboo,
+                                         int numAnswers, int distancesAdded, ref int distancesIndex)
+        {
+            for (int i = numAnswers * distancesAdded; i < numAnswers * (distancesAdded + 1); i++)
+            {
+                if (distancesAdded == numAnswers)
+                {
+                    // add the total distance to the distances array
+                    distances[distancesIndex] = temp;
+                    distancesIndex++;
+                    break;
+                }
+                else
+                {
+                    bool isTaboo = false;
+                    for (int t = 0; t < taboo.Length; t++)
+                    {
+                        // same column check, same row check
+                        if (taboo[t] != -1 &&
+                            (i % numAnswers == taboo[t] % numAnswers ||
+                            i / numAnswers == taboo[t] / numAnswers))
+                        {
+                            isTaboo = true; // found a value in the same row or same column
+                        }
+                    }
+
+                    if (!isTaboo)
+                    {
+                        // increment
+                        temp += pairings[i];
+                        taboo[distancesAdded] = i;
+                        distancesAdded++;
+                        // recurse
+                        createCombos(ref distances, pairings, temp, taboo,
+                                     numAnswers, distancesAdded, ref distancesIndex);
+                        // decrement
+                        temp -= pairings[i];
+                        taboo[distancesAdded - 1] = -1;
+                        distancesAdded--;
+                    }
+                }
+            }
+        }
+
+
+        public void createCombos(ref int[] distances, int[] pairings, int temp, int[] taboo,
+                                 int numAnswers, int distancesAdded, ref int distancesIndex)
+        {
+            for (int i = numAnswers * distancesAdded; i < numAnswers * (distancesAdded + 1); i++)
+            {
+                if (distancesAdded == numAnswers)
+                {
+                    // add the total distance to the distances array
+                    distances[distancesIndex] = temp;
+                    distancesIndex++;
+                    break;
+                }
+                else
+                {
+                    bool isTaboo = false;
+                    for (int t = 0; t < taboo.Length; t++)
+                    {
+                        // same column check, same row check
+                        if (taboo[t] != -1 &&
+                            (i % numAnswers == taboo[t] % numAnswers ||
+                            i / numAnswers == taboo[t] / numAnswers))
+                        {
+                            isTaboo = true; // found a value in the same row or same column
+                        }
+                    }
+                    if (!isTaboo)
+                    {
+                        // increment
+                        temp += pairings[i];
+                        taboo[distancesAdded] = i;
+                        distancesAdded++;
+                        // recurse
+                        createCombos(ref distances, pairings, temp, taboo,
+                                     numAnswers, distancesAdded, ref distancesIndex);
+                        // decrement
+                        temp -= pairings[i];
+                        taboo[distancesAdded - 1] = -1;
+                        distancesAdded--;
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
     }
-        #endregion
+
+    
 }
