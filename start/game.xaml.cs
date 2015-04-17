@@ -77,12 +77,29 @@ namespace Working_Memory_Battery_and_Sensor_Input
         List<cooridinate> answers;
         List<cooridinate> selections;
         public bool game_started;
+        public bool initialize_game = true;
+
+        public int game_score_band;
+        public string emotion;
+
+        public int grid_size_default = 5;
+        public int dot_number_default = 4;
+
         public int number_dots_clicked;
         public int current_level_number;
         public LevelData level1;
         public LevelData level2;
         public LevelData level3;
+        public LevelData level4;
+        public LevelData level5;
         public LevelData current_level;
+        public double game_series_p;
+        public double game_series_a;
+        public double game_series_d;
+
+        public int game_series_number = 0;
+        public int game_series_count = 3;
+
         public List<LevelData> level_data_array;
         public Game_object thisGame;
         Dictionary<string, int[]> dictionary;
@@ -118,14 +135,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
             // (size,dots, and, duration ms) 
             // heres the levels that are created, 
-            level1 = new LevelData(5, 3, 3000);
-            level2 = new LevelData(6, 4, 3000);
-            level3 = new LevelData(7, 5, 3000);
-            level_data_array = new List<LevelData>();
-            level_data_array.Add(level3);
-            level_data_array.Add(level2);
-            level_data_array.Add(level1);
-            current_level_number = level_data_array.Count;
+
             number_dots_clicked = 0;
         }
         public void set_visualization(visualization this_vis)
@@ -136,37 +146,178 @@ namespace Working_Memory_Battery_and_Sensor_Input
         public void run_game()
         {
             Console.WriteLine("Running Game");
+            Console.WriteLine("Current Level Number: " + current_level_number);
             //page_visulization.window.
-            if (0 < current_level_number)
+            //this is the training level
+            //current level number is set to the length of the level data array
+            //game_series_number is set to 0 for the first series (the training level), then it counts to 3
+
+            Console.WriteLine("init game  init game  init game  init game  init game  init game  " + current_level_number);
+
+            if (game_series_number == 0 && initialize_game == true)
             {
-                current_level_number--;
-                current_level = level_data_array[current_level_number];
-                number_dots_clicked = 0;
-
-                button_next_game.Visibility = Visibility.Hidden;
-
-                thisGame = new Game_object();
-
-                thisGame.size = current_level.size;
-                thisGame.number_dots = current_level.number_dots;
-                thisGame.show_button_duration = current_level.show_button_duration;
-
-                set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.user_game_score_euc_combo, thisGame.user_game_score_man_combo, thisGame.show_button_duration);
-                button_array = get_button_array(thisGame.size);
-                set_playing_grid_properties(thisGame.size, button_array);
-                answers = get_random_coordinate_array(thisGame.size, thisGame.number_dots);
-                set_random_pattern(answers, "1", button_array);
-                clear_random_pattern(answers, button_array, thisGame.show_button_duration);
-                thisGame.game_start = DateTime.Now;
-                thisGame.game_number = (int)number.Next(0, 999999);
-                thisGame.emotiv.set_visualization(public_this_vis);
-                thisGame.emotiv.get_tcp();
-            }
-            else
-            {
+                initialize_game = false;
+                game_series_number++;
+                 
+                level1 = new LevelData(5, 3, 3000);
+                level2 = new LevelData(6, 4, 3000);
+                level3 = new LevelData(7, 5, 3000);
+                level4 = new LevelData(6, 4, 3000);
+                level5 = new LevelData(5, 3, 3000);
+                level_data_array = new List<LevelData>();
+                level_data_array.Add(level5);
+                level_data_array.Add(level4);
+                level_data_array.Add(level3);
+                level_data_array.Add(level2);
+                level_data_array.Add(level1);
                 current_level_number = level_data_array.Count;
+
+            }
+            else if (game_series_number > 0 && initialize_game == true) {
+                //initialize  non-training games
+                if (thisGame.user_game_score_euc_combo < 1)
+                {
+                    game_score_band = 2;
+                }
+                else if (thisGame.user_game_score_euc_combo < 3)
+                {
+                    game_score_band = 1;
+                }
+                else 
+                {
+                    game_score_band = 0;
+                }
+
+                if (game_series_p > 0 && game_series_a > 0 && game_series_d > 0)
+                {
+                    emotion = "engagement";
+                }
+                else if (game_series_p < 0 && game_series_a < 0 && game_series_d < 0)
+                {
+                    emotion = "boredom";
+                }
+                else if (game_series_p < 0 && game_series_a > 0 && game_series_d < 0)
+                {
+                    emotion = "frustration";
+                }
+                else if (game_series_p > 0 && game_series_a < 0 && game_series_d > 0)
+                {
+                    emotion = "meditation";
+                }
+                else if (game_series_p > 0 && game_series_a < 0 && game_series_d < 0)
+                {
+                    emotion = "concentrating";
+                }
+                else if (game_series_p > 0 && game_series_a < 0 && game_series_d > 0)
+                {
+                    emotion = "disagreement";
+                }
+                else if (game_series_p > 0 && game_series_a > 0 && game_series_d < 0)
+                {
+                    emotion = "interested";
+                }
+                else if (game_series_p < 0 && game_series_a < 0 && game_series_d < 0)
+                {
+                    emotion = "na";
+                    Console.WriteLine(" no emotion score ");
+                }
+
+                if (game_score_band == 0)
+                {
+                    grid_size_default--;
+                    dot_number_default--;
+                }
+                else if (game_score_band == 3)
+                {
+                    grid_size_default++;
+                    dot_number_default++;
+                }
+                else if (game_score_band == 2 &&
+                    (emotion == "engagement" ||
+                    emotion == "frustration" ||
+                    emotion == "meditation" ||
+                    emotion == "disagreement"))
+                {
+                    //do nothing stay at the same grid size and dot number
+                }
+                else if (game_score_band == 2 &&
+                    (emotion == "boredom" ||
+                    emotion == "frustrated" ||
+                    emotion == "agreement" ||
+                    emotion == "concentrating" ||
+                    emotion == "interested"
+                    ))
+                {
+                    grid_size_default++;
+                    dot_number_default++;
+                }
+                else
+                {
+                    // do nothing. somoehow missed all the cases
+                    Console.WriteLine("Somehow missed all the cases of the game change  blocks");
+                }
+
+
+
+                initialize_game = false;
+                level1 = new LevelData(grid_size_default, dot_number_default, 3000);
+                level2 = new LevelData(grid_size_default, dot_number_default, 3000);
+                level3 = new LevelData(grid_size_default, dot_number_default, 3000);
+                level4 = new LevelData(grid_size_default, dot_number_default, 3000);
+                level5 = new LevelData(grid_size_default, dot_number_default, 3000);
+                level_data_array = new List<LevelData>();
+                level_data_array.Add(level5);
+                level_data_array.Add(level4);
+                level_data_array.Add(level3);
+                level_data_array.Add(level2);
+                level_data_array.Add(level1);
+                current_level_number = level_data_array.Count;
+
+            }
+
+           if (0 < current_level_number)
+           {
+               current_level_number--;
+               current_level = level_data_array[current_level_number];
+               number_dots_clicked = 0;
+
+               button_next_game.Visibility = Visibility.Hidden;
+
+               thisGame = new Game_object();
+
+               thisGame.size = current_level.size;
+               thisGame.number_dots = current_level.number_dots;
+               thisGame.show_button_duration = current_level.show_button_duration;
+
+               set_textblock_game_data(thisGame.size, number_dots_clicked, thisGame.user_game_score_euc, thisGame.user_game_score_man, thisGame.user_game_score_euc_combo, thisGame.user_game_score_man_combo, thisGame.show_button_duration);
+               button_array = get_button_array(thisGame.size);
+               set_playing_grid_properties(thisGame.size, button_array);
+               answers = get_random_coordinate_array(thisGame.size, thisGame.number_dots);
+               set_random_pattern(answers, "1", button_array);
+               clear_random_pattern(answers, button_array, thisGame.show_button_duration);
+               thisGame.game_start = DateTime.Now;
+               thisGame.game_number = (int)number.Next(0, 999999);
+               thisGame.emotiv.set_visualization(public_this_vis);
+               thisGame.emotiv.get_tcp();
+
+               game_series_p += thisGame.emotiv.p_avg;
+               game_series_a += thisGame.emotiv.a_avg;
+               game_series_d += thisGame.emotiv.d_avg;
+           }
+         else
+            {
+                game_series_p = game_series_p / level_data_array.Count;
+                game_series_a = game_series_a / level_data_array.Count;
+                game_series_d = game_series_d / level_data_array.Count;
+                Console.WriteLine("game series avg P: " + game_series_p);
+                Console.WriteLine("game series avg A:" + game_series_a);
+                Console.WriteLine("game series avg D: " + game_series_d);
+
+                current_level_number = level_data_array.Count;
+                //game_series_number = 0;
                 run_game();
             }
+
         }
 
         public void set_textblock_game_data(int size, int this_number_dots, float user_game_score_euc, float user_game_score_man, float user_game_score_euc_combo, float user_game_score_man_combo, int show_button_duration)
@@ -180,10 +331,10 @@ namespace Working_Memory_Battery_and_Sensor_Input
             }
             else
             {
-                    textblock_game_data.Text += "\n | Manhattan Score A:  " + (user_game_score_man / thisGame.number_dots).ToString();
-                    textblock_game_data.Text += "   | Manhattan Score B:  " + (user_game_score_man_combo / thisGame.number_dots).ToString();
-                    textblock_game_data.Text += "\n   | Euclidean Score A:  " + (user_game_score_euc / thisGame.number_dots).ToString() + " |";
-                    textblock_game_data.Text += "   | Euclidean Score B:  " + (user_game_score_euc_combo / thisGame.number_dots).ToString() + " |";
+                textblock_game_data.Text += "\n | Manhattan Score A:  " + (user_game_score_man / thisGame.number_dots).ToString();
+                textblock_game_data.Text += "   | Manhattan Score B:  " + (user_game_score_man_combo / thisGame.number_dots).ToString();
+                textblock_game_data.Text += "\n   | Euclidean Score A:  " + (user_game_score_euc / thisGame.number_dots).ToString() + " |";
+                textblock_game_data.Text += "   | Euclidean Score B:  " + (user_game_score_euc_combo / thisGame.number_dots).ToString() + " |";
             }
         }
 
@@ -341,7 +492,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 new_coord.x = new_button.x;
                 new_coord.y = new_button.y;
                 selections.Add(new_coord);
-                  Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
+                Console.WriteLine("Click: " + number_dots_clicked + " of " + thisGame.number_dots);
             }
             else
             {
@@ -542,7 +693,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
             int index = 0;
             createCombos(ref distances, pairings, 0, taboo, answers.Count, 0, ref index);
-            
+
             float minDistance = Single.MaxValue;
             for (int i = 0; i < distances.Length; i++)
             {
@@ -726,5 +877,5 @@ namespace Working_Memory_Battery_and_Sensor_Input
 
     }
 
-    
+
 }
