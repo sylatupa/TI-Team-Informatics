@@ -159,11 +159,11 @@ namespace Working_Memory_Battery_and_Sensor_Input
                 initialize_game = false;
                 game_series_number++;
                  
-                level1 = new LevelData(5, 3, 3000);
+                level1 = new LevelData(6, 4, 3000);
                 level2 = new LevelData(6, 4, 3000);
-                level3 = new LevelData(7, 5, 3000);
+                level3 = new LevelData(6, 4, 3000);
                 level4 = new LevelData(6, 4, 3000);
-                level5 = new LevelData(5, 3, 3000);
+                level5 = new LevelData(6, 4, 3000);
                 level_data_array = new List<LevelData>();
                 level_data_array.Add(level5);
                 level_data_array.Add(level4);
@@ -257,7 +257,7 @@ namespace Working_Memory_Battery_and_Sensor_Input
                     Console.WriteLine("Somehow missed all the cases of the game change  blocks");
                 }
 
-
+                
 
                 initialize_game = false;
                 level1 = new LevelData(grid_size_default, dot_number_default, 3000);
